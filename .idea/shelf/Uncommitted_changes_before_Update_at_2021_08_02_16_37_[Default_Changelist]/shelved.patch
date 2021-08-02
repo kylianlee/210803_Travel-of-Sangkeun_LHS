@@ -1,0 +1,1036 @@
+Index: main.cpp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//\n// Created by Kylian Lee on 2021/07/29.\n//\n\n#include <iostream>\n#include <vector>\n\nusing namespace std;\n\n//int solution(vector<vector<int>>& route, int countries);\n\nint main(){\n  int case_num;\n  cin >> case_num;\n  for (int i = 0; i < case_num; ++i) {\n    int countries, plains;\n    cin >> countries >> plains;\n    vector<vector<int>> route(countries + 1);\n    for (int j = 0; j < countries + 1; ++j) {\n      route[j].resize(countries + 1);\n    }\n    for (int j = 0; j < plains; ++j) {\n      int s, d;\n      cin >> s >> d;\n      route[s][d] = 1;\n      route[d][s] = 1;\n    }\n//    for (int j = 1; j < plains + 1; ++j) {\n//      for (int k = 1; k < plains + 1; ++k) {\n//        cout << route[j][k];\n//      }\n//      cout << endl;\n//    }\n    cout << countries - 1 << endl;\n  }\n}\n\n//int solution(vector<vector<int>>& route, int countries){\n//  vector<bool> visited(countries + 1, false);\n//  stack<int> s;\n//  int count = 0;\n//  s.push(1);\n//  visited[1] = true;\n//  while(!s.empty()){\n//\n//  }\n//}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/main.cpp b/main.cpp
+--- a/main.cpp	(revision e6a7d7248582cd3babc8f2ed33ffc125a735e777)
++++ b/main.cpp	(date 1627889808030)
+@@ -4,10 +4,11 @@
+ 
+ #include <iostream>
+ #include <vector>
++#include <stack>
+ 
+ using namespace std;
+ 
+-//int solution(vector<vector<int>>& route, int countries);
++int solution(vector<vector<int>>& route, int countries);
+ 
+ int main(){
+   int case_num;
+@@ -31,17 +32,29 @@
+ //      }
+ //      cout << endl;
+ //    }
+-    cout << countries - 1 << endl;
++    cout << solution(route, countries) << endl;
+   }
+ }
+ 
+-//int solution(vector<vector<int>>& route, int countries){
+-//  vector<bool> visited(countries + 1, false);
+-//  stack<int> s;
+-//  int count = 0;
+-//  s.push(1);
+-//  visited[1] = true;
+-//  while(!s.empty()){
+-//
+-//  }
+-//}
+\ No newline at end of file
++int solution(vector<vector<int>>& route, int countries){
++  vector<bool> visited(countries + 1, false);
++  stack<int> s;
++  int count = 0;
++  s.push(1);
++  visited[1] = true;
++  while(!s.empty()){
++    int i;
++    int top = s.top();
++    for (i = 1; i <= countries; ++i) {
++      if(!visited[i] && route[top][i] == 1){
++        s.push(i);
++        visited[i] = true;
++        count++;
++        break;
++      }
++    }
++    if(i == countries + 1)
++      s.pop();
++  }
++  return count;
++}
+\ No newline at end of file
+Index: cmake-build-debug/CMakeFiles/clion-log.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G \"CodeBlocks - Unix Makefiles\" /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS\n-- The C compiler identification is AppleClang 12.0.5.12050022\n-- The CXX compiler identification is AppleClang 12.0.5.12050022\n-- Detecting C compiler ABI info\n-- Detecting C compiler ABI info - done\n-- Check for working C compiler: /Library/Developer/CommandLineTools/usr/bin/cc - skipped\n-- Detecting C compile features\n-- Detecting C compile features - done\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /Library/Developer/CommandLineTools/usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Configuring done\n-- Generating done\n-- Build files have been written to: /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/CMakeFiles/clion-log.txt b/cmake-build-debug/CMakeFiles/clion-log.txt
+--- a/cmake-build-debug/CMakeFiles/clion-log.txt	(revision e6a7d7248582cd3babc8f2ed33ffc125a735e777)
++++ b/cmake-build-debug/CMakeFiles/clion-log.txt	(date 1627886088835)
+@@ -1,4 +1,4 @@
+-/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS
++/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS
+ -- The C compiler identification is AppleClang 12.0.5.12050022
+ -- The CXX compiler identification is AppleClang 12.0.5.12050022
+ -- Detecting C compiler ABI info
+Index: cmake-build-debug/Testing/Temporary/LastTest.log
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>Start testing: Jul 30 07:00 KST\n----------------------------------------------------------\nEnd testing: Jul 30 07:00 KST\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/Testing/Temporary/LastTest.log b/cmake-build-debug/Testing/Temporary/LastTest.log
+--- a/cmake-build-debug/Testing/Temporary/LastTest.log	(revision e6a7d7248582cd3babc8f2ed33ffc125a735e777)
++++ b/cmake-build-debug/Testing/Temporary/LastTest.log	(date 1627889813306)
+@@ -1,3 +1,3 @@
+-Start testing: Jul 30 07:00 KST
++Start testing: Aug 02 16:36 KST
+ ----------------------------------------------------------
+-End testing: Jul 30 07:00 KST
++End testing: Aug 02 16:36 KST
+Index: cmake-build-debug/Makefile
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># CMAKE generated file: DO NOT EDIT!\n# Generated by \"Unix Makefiles\" Generator, CMake Version 3.19\n\n# Default target executed when no arguments are given to make.\ndefault_target: all\n\n.PHONY : default_target\n\n# Allow only one \"make -f Makefile2\" at a time, but pass parallelism.\n.NOTPARALLEL:\n\n\n#=============================================================================\n# Special targets provided by cmake.\n\n# Disable implicit rules so canonical targets will work.\n.SUFFIXES:\n\n\n# Disable VCS-based implicit rules.\n% : %,v\n\n\n# Disable VCS-based implicit rules.\n% : RCS/%\n\n\n# Disable VCS-based implicit rules.\n% : RCS/%,v\n\n\n# Disable VCS-based implicit rules.\n% : SCCS/s.%\n\n\n# Disable VCS-based implicit rules.\n% : s.%\n\n\n.SUFFIXES: .hpux_make_needs_suffix_list\n\n\n# Command-line flag to silence nested $(MAKE).\n$(VERBOSE)MAKESILENT = -s\n\n#Suppress display of executed commands.\n$(VERBOSE).SILENT:\n\n# A target that is always out of date.\ncmake_force:\n\n.PHONY : cmake_force\n\n#=============================================================================\n# Set environment variables for the build.\n\n# The shell in which to execute make rules.\nSHELL = /bin/sh\n\n# The CMake executable.\nCMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake\n\n# The command to remove a file.\nRM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f\n\n# Escaping for special characters.\nEQUALS = =\n\n# The top-level source directory on which CMake was run.\nCMAKE_SOURCE_DIR = /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS\n\n# The top-level build directory on which CMake was run.\nCMAKE_BINARY_DIR = /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug\n\n#=============================================================================\n# Targets provided globally by CMake.\n\n# Special rule for the target rebuild_cache\nrebuild_cache:\n\t@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan \"Running CMake to regenerate build system...\"\n\t/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)\n.PHONY : rebuild_cache\n\n# Special rule for the target rebuild_cache\nrebuild_cache/fast: rebuild_cache\n\n.PHONY : rebuild_cache/fast\n\n# Special rule for the target edit_cache\nedit_cache:\n\t@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan \"No interactive CMake dialog available...\"\n\t/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\\ interactive\\ CMake\\ dialog\\ available.\n.PHONY : edit_cache\n\n# Special rule for the target edit_cache\nedit_cache/fast: edit_cache\n\n.PHONY : edit_cache/fast\n\n# The main all target\nall: cmake_check_build_system\n\t$(CMAKE_COMMAND) -E cmake_progress_start /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug//CMakeFiles/progress.marks\n\t$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all\n\t$(CMAKE_COMMAND) -E cmake_progress_start /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles 0\n.PHONY : all\n\n# The main clean target\nclean:\n\t$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean\n.PHONY : clean\n\n# The main clean target\nclean/fast: clean\n\n.PHONY : clean/fast\n\n# Prepare targets for installation.\npreinstall: all\n\t$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall\n.PHONY : preinstall\n\n# Prepare targets for installation.\npreinstall/fast:\n\t$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall\n.PHONY : preinstall/fast\n\n# clear depends\ndepend:\n\t$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1\n.PHONY : depend\n\n#=============================================================================\n# Target rules for targets named 210803_Travel_of_Sangkeun_LHS\n\n# Build rule for target.\n210803_Travel_of_Sangkeun_LHS: cmake_check_build_system\n\t$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 210803_Travel_of_Sangkeun_LHS\n.PHONY : 210803_Travel_of_Sangkeun_LHS\n\n# fast build rule for target.\n210803_Travel_of_Sangkeun_LHS/fast:\n\t$(MAKE) $(MAKESILENT) -f CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build.make CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build\n.PHONY : 210803_Travel_of_Sangkeun_LHS/fast\n\nmain.o: main.cpp.o\n\n.PHONY : main.o\n\n# target to build an object file\nmain.cpp.o:\n\t$(MAKE) $(MAKESILENT) -f CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build.make CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/main.cpp.o\n.PHONY : main.cpp.o\n\nmain.i: main.cpp.i\n\n.PHONY : main.i\n\n# target to preprocess a source file\nmain.cpp.i:\n\t$(MAKE) $(MAKESILENT) -f CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build.make CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/main.cpp.i\n.PHONY : main.cpp.i\n\nmain.s: main.cpp.s\n\n.PHONY : main.s\n\n# target to generate assembly for a file\nmain.cpp.s:\n\t$(MAKE) $(MAKESILENT) -f CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build.make CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/main.cpp.s\n.PHONY : main.cpp.s\n\n# Help Target\nhelp:\n\t@echo \"The following are some of the valid targets for this Makefile:\"\n\t@echo \"... all (the default if no target is provided)\"\n\t@echo \"... clean\"\n\t@echo \"... depend\"\n\t@echo \"... edit_cache\"\n\t@echo \"... rebuild_cache\"\n\t@echo \"... 210803_Travel_of_Sangkeun_LHS\"\n\t@echo \"... main.o\"\n\t@echo \"... main.i\"\n\t@echo \"... main.s\"\n.PHONY : help\n\n\n\n#=============================================================================\n# Special targets to cleanup operation of make.\n\n# Special rule to run CMake to check the build system integrity.\n# No rule that depends on this can have commands that come from listfiles\n# because they might be regenerated.\ncmake_check_build_system:\n\t$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0\n.PHONY : cmake_check_build_system\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/Makefile b/cmake-build-debug/Makefile
+--- a/cmake-build-debug/Makefile	(revision e6a7d7248582cd3babc8f2ed33ffc125a735e777)
++++ b/cmake-build-debug/Makefile	(date 1627886088417)
+@@ -1,45 +1,36 @@
+ # CMAKE generated file: DO NOT EDIT!
+-# Generated by "Unix Makefiles" Generator, CMake Version 3.19
++# Generated by "Unix Makefiles" Generator, CMake Version 3.20
+ 
+ # Default target executed when no arguments are given to make.
+ default_target: all
+-
+ .PHONY : default_target
+ 
+ # Allow only one "make -f Makefile2" at a time, but pass parallelism.
+ .NOTPARALLEL:
+ 
+-
+ #=============================================================================
+ # Special targets provided by cmake.
+ 
+ # Disable implicit rules so canonical targets will work.
+ .SUFFIXES:
+ 
+-
+ # Disable VCS-based implicit rules.
+ % : %,v
+ 
+-
+ # Disable VCS-based implicit rules.
+ % : RCS/%
+ 
+-
+ # Disable VCS-based implicit rules.
+ % : RCS/%,v
+ 
+-
+ # Disable VCS-based implicit rules.
+ % : SCCS/s.%
+ 
+-
+ # Disable VCS-based implicit rules.
+ % : s.%
+ 
+-
+ .SUFFIXES: .hpux_make_needs_suffix_list
+ 
+-
+ # Command-line flag to silence nested $(MAKE).
+ $(VERBOSE)MAKESILENT = -s
+ 
+@@ -48,7 +39,6 @@
+ 
+ # A target that is always out of date.
+ cmake_force:
+-
+ .PHONY : cmake_force
+ 
+ #=============================================================================
+@@ -83,7 +73,6 @@
+ 
+ # Special rule for the target rebuild_cache
+ rebuild_cache/fast: rebuild_cache
+-
+ .PHONY : rebuild_cache/fast
+ 
+ # Special rule for the target edit_cache
+@@ -94,7 +83,6 @@
+ 
+ # Special rule for the target edit_cache
+ edit_cache/fast: edit_cache
+-
+ .PHONY : edit_cache/fast
+ 
+ # The main all target
+@@ -111,7 +99,6 @@
+ 
+ # The main clean target
+ clean/fast: clean
+-
+ .PHONY : clean/fast
+ 
+ # Prepare targets for installation.
+@@ -143,7 +130,6 @@
+ .PHONY : 210803_Travel_of_Sangkeun_LHS/fast
+ 
+ main.o: main.cpp.o
+-
+ .PHONY : main.o
+ 
+ # target to build an object file
+@@ -152,7 +138,6 @@
+ .PHONY : main.cpp.o
+ 
+ main.i: main.cpp.i
+-
+ .PHONY : main.i
+ 
+ # target to preprocess a source file
+@@ -161,7 +146,6 @@
+ .PHONY : main.cpp.i
+ 
+ main.s: main.cpp.s
+-
+ .PHONY : main.s
+ 
+ # target to generate assembly for a file
+Index: cmake-build-debug/CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/DependInfo.cmake
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># The set of languages for which implicit dependencies are needed:\nset(CMAKE_DEPENDS_LANGUAGES\n  \"CXX\"\n  )\n# The set of files for implicit dependencies of each language:\nset(CMAKE_DEPENDS_CHECK_CXX\n  \"/Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/main.cpp\" \"/Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/main.cpp.o\"\n  )\nset(CMAKE_CXX_COMPILER_ID \"AppleClang\")\n\n# The include file search paths:\nset(CMAKE_CXX_TARGET_INCLUDE_PATH\n  )\n\n# Targets to which this target links.\nset(CMAKE_TARGET_LINKED_INFO_FILES\n  )\n\n# Fortran module output directory.\nset(CMAKE_Fortran_TARGET_MODULE_DIR \"\")\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/DependInfo.cmake b/cmake-build-debug/CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/DependInfo.cmake
+--- a/cmake-build-debug/CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/DependInfo.cmake	(revision e6a7d7248582cd3babc8f2ed33ffc125a735e777)
++++ b/cmake-build-debug/CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/DependInfo.cmake	(date 1627886088416)
+@@ -1,3 +1,7 @@
++
++# Consider dependencies only in project.
++set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
++
+ # The set of languages for which implicit dependencies are needed:
+ set(CMAKE_DEPENDS_LANGUAGES
+   "CXX"
+@@ -12,6 +16,10 @@
+ set(CMAKE_CXX_TARGET_INCLUDE_PATH
+   )
+ 
++# The set of dependency files which are needed:
++set(CMAKE_DEPENDS_DEPENDENCY_FILES
++  )
++
+ # Targets to which this target links.
+ set(CMAKE_TARGET_LINKED_INFO_FILES
+   )
+Index: cmake-build-debug/CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build.make
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># CMAKE generated file: DO NOT EDIT!\n# Generated by \"Unix Makefiles\" Generator, CMake Version 3.19\n\n# Delete rule output on recipe failure.\n.DELETE_ON_ERROR:\n\n\n#=============================================================================\n# Special targets provided by cmake.\n\n# Disable implicit rules so canonical targets will work.\n.SUFFIXES:\n\n\n# Disable VCS-based implicit rules.\n% : %,v\n\n\n# Disable VCS-based implicit rules.\n% : RCS/%\n\n\n# Disable VCS-based implicit rules.\n% : RCS/%,v\n\n\n# Disable VCS-based implicit rules.\n% : SCCS/s.%\n\n\n# Disable VCS-based implicit rules.\n% : s.%\n\n\n.SUFFIXES: .hpux_make_needs_suffix_list\n\n\n# Command-line flag to silence nested $(MAKE).\n$(VERBOSE)MAKESILENT = -s\n\n#Suppress display of executed commands.\n$(VERBOSE).SILENT:\n\n# A target that is always out of date.\ncmake_force:\n\n.PHONY : cmake_force\n\n#=============================================================================\n# Set environment variables for the build.\n\n# The shell in which to execute make rules.\nSHELL = /bin/sh\n\n# The CMake executable.\nCMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake\n\n# The command to remove a file.\nRM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f\n\n# Escaping for special characters.\nEQUALS = =\n\n# The top-level source directory on which CMake was run.\nCMAKE_SOURCE_DIR = /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS\n\n# The top-level build directory on which CMake was run.\nCMAKE_BINARY_DIR = /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug\n\n# Include any dependencies generated for this target.\ninclude CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/depend.make\n\n# Include the progress variables for this target.\ninclude CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/progress.make\n\n# Include the compile flags for this target's objects.\ninclude CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/flags.make\n\nCMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/main.cpp.o: CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/flags.make\nCMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/main.cpp.o: ../main.cpp\n\t@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) \"Building CXX object CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/main.cpp.o\"\n\t/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/main.cpp.o -c /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/main.cpp\n\nCMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/main.cpp.i: cmake_force\n\t@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green \"Preprocessing CXX source to CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/main.cpp.i\"\n\t/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/main.cpp > CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/main.cpp.i\n\nCMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/main.cpp.s: cmake_force\n\t@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green \"Compiling CXX source to assembly CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/main.cpp.s\"\n\t/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/main.cpp -o CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/main.cpp.s\n\n# Object files for target 210803_Travel_of_Sangkeun_LHS\n210803_Travel_of_Sangkeun_LHS_OBJECTS = \\\n\"CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/main.cpp.o\"\n\n# External object files for target 210803_Travel_of_Sangkeun_LHS\n210803_Travel_of_Sangkeun_LHS_EXTERNAL_OBJECTS =\n\n210803_Travel_of_Sangkeun_LHS: CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/main.cpp.o\n210803_Travel_of_Sangkeun_LHS: CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build.make\n210803_Travel_of_Sangkeun_LHS: CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/link.txt\n\t@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) \"Linking CXX executable 210803_Travel_of_Sangkeun_LHS\"\n\t$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/link.txt --verbose=$(VERBOSE)\n\n# Rule to build all files generated by this target.\nCMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build: 210803_Travel_of_Sangkeun_LHS\n\n.PHONY : CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build\n\nCMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/clean:\n\t$(CMAKE_COMMAND) -P CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/cmake_clean.cmake\n.PHONY : CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/clean\n\nCMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/depend:\n\tcd /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends \"Unix Makefiles\" /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/DependInfo.cmake --color=$(COLOR)\n.PHONY : CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/depend\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build.make b/cmake-build-debug/CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build.make
+--- a/cmake-build-debug/CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build.make	(revision e6a7d7248582cd3babc8f2ed33ffc125a735e777)
++++ b/cmake-build-debug/CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build.make	(date 1627886088416)
+@@ -1,40 +1,32 @@
+ # CMAKE generated file: DO NOT EDIT!
+-# Generated by "Unix Makefiles" Generator, CMake Version 3.19
++# Generated by "Unix Makefiles" Generator, CMake Version 3.20
+ 
+ # Delete rule output on recipe failure.
+ .DELETE_ON_ERROR:
+ 
+-
+ #=============================================================================
+ # Special targets provided by cmake.
+ 
+ # Disable implicit rules so canonical targets will work.
+ .SUFFIXES:
+ 
+-
+ # Disable VCS-based implicit rules.
+ % : %,v
+ 
+-
+ # Disable VCS-based implicit rules.
+ % : RCS/%
+ 
+-
+ # Disable VCS-based implicit rules.
+ % : RCS/%,v
+ 
+-
+ # Disable VCS-based implicit rules.
+ % : SCCS/s.%
+ 
+-
+ # Disable VCS-based implicit rules.
+ % : s.%
+ 
+-
+ .SUFFIXES: .hpux_make_needs_suffix_list
+ 
+-
+ # Command-line flag to silence nested $(MAKE).
+ $(VERBOSE)MAKESILENT = -s
+ 
+@@ -43,7 +35,6 @@
+ 
+ # A target that is always out of date.
+ cmake_force:
+-
+ .PHONY : cmake_force
+ 
+ #=============================================================================
+@@ -69,7 +60,6 @@
+ 
+ # Include any dependencies generated for this target.
+ include CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/depend.make
+-
+ # Include the progress variables for this target.
+ include CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/progress.make
+ 
+@@ -104,7 +94,6 @@
+ 
+ # Rule to build all files generated by this target.
+ CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build: 210803_Travel_of_Sangkeun_LHS
+-
+ .PHONY : CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build
+ 
+ CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/clean:
+Index: cmake-build-debug/CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/flags.make
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># CMAKE generated file: DO NOT EDIT!\n# Generated by \"Unix Makefiles\" Generator, CMake Version 3.19\n\n# compile CXX with /Library/Developer/CommandLineTools/usr/bin/c++\nCXX_DEFINES = \n\nCXX_INCLUDES = \n\nCXX_FLAGSarm64 = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++14\n\nCXX_FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++14\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/flags.make b/cmake-build-debug/CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/flags.make
+--- a/cmake-build-debug/CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/flags.make	(revision e6a7d7248582cd3babc8f2ed33ffc125a735e777)
++++ b/cmake-build-debug/CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/flags.make	(date 1627886088416)
+@@ -1,5 +1,5 @@
+ # CMAKE generated file: DO NOT EDIT!
+-# Generated by "Unix Makefiles" Generator, CMake Version 3.19
++# Generated by "Unix Makefiles" Generator, CMake Version 3.20
+ 
+ # compile CXX with /Library/Developer/CommandLineTools/usr/bin/c++
+ CXX_DEFINES = 
+Index: cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># CMAKE generated file: DO NOT EDIT!\n# Generated by \"Unix Makefiles\" Generator, CMake Version 3.19\n\n# Relative path conversion top directories.\nset(CMAKE_RELATIVE_PATH_TOP_SOURCE \"/Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS\")\nset(CMAKE_RELATIVE_PATH_TOP_BINARY \"/Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug\")\n\n# Force unix paths in dependencies.\nset(CMAKE_FORCE_UNIX_PATHS 1)\n\n\n# The C and CXX include file regular expressions for this directory.\nset(CMAKE_C_INCLUDE_REGEX_SCAN \"^.*$\")\nset(CMAKE_C_INCLUDE_REGEX_COMPLAIN \"^$\")\nset(CMAKE_CXX_INCLUDE_REGEX_SCAN ${CMAKE_C_INCLUDE_REGEX_SCAN})\nset(CMAKE_CXX_INCLUDE_REGEX_COMPLAIN ${CMAKE_C_INCLUDE_REGEX_COMPLAIN})\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake b/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake
+--- a/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake	(revision e6a7d7248582cd3babc8f2ed33ffc125a735e777)
++++ b/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake	(date 1627886088417)
+@@ -1,5 +1,5 @@
+ # CMAKE generated file: DO NOT EDIT!
+-# Generated by "Unix Makefiles" Generator, CMake Version 3.19
++# Generated by "Unix Makefiles" Generator, CMake Version 3.20
+ 
+ # Relative path conversion top directories.
+ set(CMAKE_RELATIVE_PATH_TOP_SOURCE "/Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS")
+Index: cmake-build-debug/CMakeCache.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># This is the CMakeCache file.\n# For build in directory: /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug\n# It was generated by CMake: /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake\n# You can edit this file to change values found and used by cmake.\n# If you do not want to change any of the values, simply exit the editor.\n# If you do want to change a value, simply edit, save, and exit the editor.\n# The syntax for the file is as follows:\n# KEY:TYPE=VALUE\n# KEY is the name of a variable in the cache.\n# TYPE is a hint to GUIs for the type of VALUE, DO NOT EDIT TYPE!.\n# VALUE is the current value for the KEY.\n\n########################\n# EXTERNAL cache entries\n########################\n\n//Value Computed by CMake\n210803_Travel_of_Sangkeun_LHS_BINARY_DIR:STATIC=/Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug\n\n//Value Computed by CMake\n210803_Travel_of_Sangkeun_LHS_SOURCE_DIR:STATIC=/Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS\n\n//Path to a program.\nCMAKE_ADDR2LINE:FILEPATH=CMAKE_ADDR2LINE-NOTFOUND\n\n//Path to a program.\nCMAKE_AR:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/ar\n\n//Choose the type of build, options are: None Debug Release RelWithDebInfo\n// MinSizeRel ...\nCMAKE_BUILD_TYPE:STRING=Debug\n\n//Id string of the compiler for the CodeBlocks IDE. Automatically\n// detected when left empty\nCMAKE_CODEBLOCKS_COMPILER_ID:STRING=\n\n//The CodeBlocks executable\nCMAKE_CODEBLOCKS_EXECUTABLE:FILEPATH=CMAKE_CODEBLOCKS_EXECUTABLE-NOTFOUND\n\n//Additional command line arguments when CodeBlocks invokes make.\n// Enter e.g. -j<some_number> to get parallel builds\nCMAKE_CODEBLOCKS_MAKE_ARGUMENTS:STRING=-j8\n\n//Enable/Disable color output during build.\nCMAKE_COLOR_MAKEFILE:BOOL=ON\n\n//CXX compiler\nCMAKE_CXX_COMPILER:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/c++\n\n//Flags used by the CXX compiler during all build types.\nCMAKE_CXX_FLAGS:STRING=\n\n//Flags used by the CXX compiler during DEBUG builds.\nCMAKE_CXX_FLAGS_DEBUG:STRING=-g\n\n//Flags used by the CXX compiler during MINSIZEREL builds.\nCMAKE_CXX_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG\n\n//Flags used by the CXX compiler during RELEASE builds.\nCMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG\n\n//Flags used by the CXX compiler during RELWITHDEBINFO builds.\nCMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG\n\n//C compiler\nCMAKE_C_COMPILER:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/cc\n\n//Flags used by the C compiler during all build types.\nCMAKE_C_FLAGS:STRING=\n\n//Flags used by the C compiler during DEBUG builds.\nCMAKE_C_FLAGS_DEBUG:STRING=-g\n\n//Flags used by the C compiler during MINSIZEREL builds.\nCMAKE_C_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG\n\n//Flags used by the C compiler during RELEASE builds.\nCMAKE_C_FLAGS_RELEASE:STRING=-O3 -DNDEBUG\n\n//Flags used by the C compiler during RELWITHDEBINFO builds.\nCMAKE_C_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG\n\n//Path to a program.\nCMAKE_DLLTOOL:FILEPATH=CMAKE_DLLTOOL-NOTFOUND\n\n//Executable file format\nCMAKE_EXECUTABLE_FORMAT:STRING=MACHO\n\n//Flags used by the linker during all build types.\nCMAKE_EXE_LINKER_FLAGS:STRING=\n\n//Flags used by the linker during DEBUG builds.\nCMAKE_EXE_LINKER_FLAGS_DEBUG:STRING=\n\n//Flags used by the linker during MINSIZEREL builds.\nCMAKE_EXE_LINKER_FLAGS_MINSIZEREL:STRING=\n\n//Flags used by the linker during RELEASE builds.\nCMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=\n\n//Flags used by the linker during RELWITHDEBINFO builds.\nCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=\n\n//Enable/Disable output of compile commands during generation.\nCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=\n\n//Path to a program.\nCMAKE_INSTALL_NAME_TOOL:FILEPATH=/usr/bin/install_name_tool\n\n//Install path prefix, prepended onto install directories.\nCMAKE_INSTALL_PREFIX:PATH=/usr/local\n\n//Path to a program.\nCMAKE_LINKER:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/ld\n\n//Path to a program.\nCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/make\n\n//Flags used by the linker during the creation of modules during\n// all build types.\nCMAKE_MODULE_LINKER_FLAGS:STRING=\n\n//Flags used by the linker during the creation of modules during\n// DEBUG builds.\nCMAKE_MODULE_LINKER_FLAGS_DEBUG:STRING=\n\n//Flags used by the linker during the creation of modules during\n// MINSIZEREL builds.\nCMAKE_MODULE_LINKER_FLAGS_MINSIZEREL:STRING=\n\n//Flags used by the linker during the creation of modules during\n// RELEASE builds.\nCMAKE_MODULE_LINKER_FLAGS_RELEASE:STRING=\n\n//Flags used by the linker during the creation of modules during\n// RELWITHDEBINFO builds.\nCMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=\n\n//Path to a program.\nCMAKE_NM:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/nm\n\n//Path to a program.\nCMAKE_OBJCOPY:FILEPATH=CMAKE_OBJCOPY-NOTFOUND\n\n//Path to a program.\nCMAKE_OBJDUMP:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/objdump\n\n//Build architectures for OSX\nCMAKE_OSX_ARCHITECTURES:STRING=\n\n//Minimum OS X version to target for deployment (at runtime); newer\n// APIs weak linked. Set to empty string for default value.\nCMAKE_OSX_DEPLOYMENT_TARGET:STRING=\n\n//The product will be built against the headers and libraries located\n// inside the indicated SDK.\nCMAKE_OSX_SYSROOT:PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk\n\n//Value Computed by CMake\nCMAKE_PROJECT_DESCRIPTION:STATIC=\n\n//Value Computed by CMake\nCMAKE_PROJECT_HOMEPAGE_URL:STATIC=\n\n//Value Computed by CMake\nCMAKE_PROJECT_NAME:STATIC=210803_Travel_of_Sangkeun_LHS\n\n//Path to a program.\nCMAKE_RANLIB:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/ranlib\n\n//Path to a program.\nCMAKE_READELF:FILEPATH=CMAKE_READELF-NOTFOUND\n\n//Flags used by the linker during the creation of shared libraries\n// during all build types.\nCMAKE_SHARED_LINKER_FLAGS:STRING=\n\n//Flags used by the linker during the creation of shared libraries\n// during DEBUG builds.\nCMAKE_SHARED_LINKER_FLAGS_DEBUG:STRING=\n\n//Flags used by the linker during the creation of shared libraries\n// during MINSIZEREL builds.\nCMAKE_SHARED_LINKER_FLAGS_MINSIZEREL:STRING=\n\n//Flags used by the linker during the creation of shared libraries\n// during RELEASE builds.\nCMAKE_SHARED_LINKER_FLAGS_RELEASE:STRING=\n\n//Flags used by the linker during the creation of shared libraries\n// during RELWITHDEBINFO builds.\nCMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO:STRING=\n\n//If set, runtime paths are not added when installing shared libraries,\n// but are added when building.\nCMAKE_SKIP_INSTALL_RPATH:BOOL=NO\n\n//If set, runtime paths are not added when using shared libraries.\nCMAKE_SKIP_RPATH:BOOL=NO\n\n//Flags used by the linker during the creation of static libraries\n// during all build types.\nCMAKE_STATIC_LINKER_FLAGS:STRING=\n\n//Flags used by the linker during the creation of static libraries\n// during DEBUG builds.\nCMAKE_STATIC_LINKER_FLAGS_DEBUG:STRING=\n\n//Flags used by the linker during the creation of static libraries\n// during MINSIZEREL builds.\nCMAKE_STATIC_LINKER_FLAGS_MINSIZEREL:STRING=\n\n//Flags used by the linker during the creation of static libraries\n// during RELEASE builds.\nCMAKE_STATIC_LINKER_FLAGS_RELEASE:STRING=\n\n//Flags used by the linker during the creation of static libraries\n// during RELWITHDEBINFO builds.\nCMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=\n\n//Path to a program.\nCMAKE_STRIP:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/strip\n\n//If this value is on, makefiles will be generated without the\n// .SILENT directive, and all commands will be echoed to the console\n// during the make.  This is useful for debugging only. With Visual\n// Studio IDE projects all commands are done without /nologo.\nCMAKE_VERBOSE_MAKEFILE:BOOL=FALSE\n\n//Path to a program.\nProcessorCount_cmd_sysctl:FILEPATH=/usr/sbin/sysctl\n\n\n########################\n# INTERNAL cache entries\n########################\n\n//ADVANCED property for variable: CMAKE_ADDR2LINE\nCMAKE_ADDR2LINE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_AR\nCMAKE_AR-ADVANCED:INTERNAL=1\n//This is the directory where this CMakeCache.txt was created\nCMAKE_CACHEFILE_DIR:INTERNAL=/Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug\n//Major version of cmake used to create the current loaded cache\nCMAKE_CACHE_MAJOR_VERSION:INTERNAL=3\n//Minor version of cmake used to create the current loaded cache\nCMAKE_CACHE_MINOR_VERSION:INTERNAL=19\n//Patch version of cmake used to create the current loaded cache\nCMAKE_CACHE_PATCH_VERSION:INTERNAL=2\n//ADVANCED property for variable: CMAKE_COLOR_MAKEFILE\nCMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1\n//Path to CMake executable.\nCMAKE_COMMAND:INTERNAL=/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake\n//Path to cpack program executable.\nCMAKE_CPACK_COMMAND:INTERNAL=/Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack\n//Path to ctest program executable.\nCMAKE_CTEST_COMMAND:INTERNAL=/Applications/CLion.app/Contents/bin/cmake/mac/bin/ctest\n//ADVANCED property for variable: CMAKE_CXX_COMPILER\nCMAKE_CXX_COMPILER-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_FLAGS\nCMAKE_CXX_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_FLAGS_DEBUG\nCMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_FLAGS_MINSIZEREL\nCMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_FLAGS_RELEASE\nCMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_FLAGS_RELWITHDEBINFO\nCMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_C_COMPILER\nCMAKE_C_COMPILER-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_C_FLAGS\nCMAKE_C_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_C_FLAGS_DEBUG\nCMAKE_C_FLAGS_DEBUG-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_C_FLAGS_MINSIZEREL\nCMAKE_C_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_C_FLAGS_RELEASE\nCMAKE_C_FLAGS_RELEASE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_C_FLAGS_RELWITHDEBINFO\nCMAKE_C_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_DLLTOOL\nCMAKE_DLLTOOL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS\nCMAKE_EXE_LINKER_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_DEBUG\nCMAKE_EXE_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_MINSIZEREL\nCMAKE_EXE_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_RELEASE\nCMAKE_EXE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO\nCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_EXPORT_COMPILE_COMMANDS\nCMAKE_EXPORT_COMPILE_COMMANDS-ADVANCED:INTERNAL=1\n//Name of external makefile project generator.\nCMAKE_EXTRA_GENERATOR:INTERNAL=CodeBlocks\n//CXX compiler system defined macros\nCMAKE_EXTRA_GENERATOR_CXX_SYSTEM_DEFINED_MACROS:INTERNAL=__llvm__;1;__clang__;1;__clang_major__;12;__clang_minor__;0;__clang_patchlevel__;5;__clang_version__;\"12.0.5 (clang-1205.0.22.9)\";__GNUC__;4;__GNUC_MINOR__;2;__GNUC_PATCHLEVEL__;1;__GXX_ABI_VERSION;1002;__ATOMIC_RELAXED;0;__ATOMIC_CONSUME;1;__ATOMIC_ACQUIRE;2;__ATOMIC_RELEASE;3;__ATOMIC_ACQ_REL;4;__ATOMIC_SEQ_CST;5;__OPENCL_MEMORY_SCOPE_WORK_ITEM;0;__OPENCL_MEMORY_SCOPE_WORK_GROUP;1;__OPENCL_MEMORY_SCOPE_DEVICE;2;__OPENCL_MEMORY_SCOPE_ALL_SVM_DEVICES;3;__OPENCL_MEMORY_SCOPE_SUB_GROUP;4;__PRAGMA_REDEFINE_EXTNAME;1;__VERSION__;\"Apple LLVM 12.0.5 (clang-1205.0.22.9)\";__OBJC_BOOL_IS_BOOL;1;__CONSTANT_CFSTRINGS__;1;__block;__attribute__((__blocks__(byref)));__BLOCKS__;1;__ORDER_LITTLE_ENDIAN__;1234;__ORDER_BIG_ENDIAN__;4321;__ORDER_PDP_ENDIAN__;3412;__BYTE_ORDER__;__ORDER_LITTLE_ENDIAN__;__LITTLE_ENDIAN__;1;_LP64;1;__LP64__;1;__CHAR_BIT__;8;__SCHAR_MAX__;127;__SHRT_MAX__;32767;__INT_MAX__;2147483647;__LONG_MAX__;9223372036854775807L;__LONG_LONG_MAX__;9223372036854775807LL;__WCHAR_MAX__;2147483647;__WINT_MAX__;2147483647;__INTMAX_MAX__;9223372036854775807L;__SIZE_MAX__;18446744073709551615UL;__UINTMAX_MAX__;18446744073709551615UL;__PTRDIFF_MAX__;9223372036854775807L;__INTPTR_MAX__;9223372036854775807L;__UINTPTR_MAX__;18446744073709551615UL;__SIZEOF_DOUBLE__;8;__SIZEOF_FLOAT__;4;__SIZEOF_INT__;4;__SIZEOF_LONG__;8;__SIZEOF_LONG_DOUBLE__;8;__SIZEOF_LONG_LONG__;8;__SIZEOF_POINTER__;8;__SIZEOF_SHORT__;2;__SIZEOF_PTRDIFF_T__;8;__SIZEOF_SIZE_T__;8;__SIZEOF_WCHAR_T__;4;__SIZEOF_WINT_T__;4;__SIZEOF_INT128__;16;__INTMAX_TYPE__;long int;__INTMAX_FMTd__;\"ld\";__INTMAX_FMTi__;\"li\";__INTMAX_C_SUFFIX__;L;__UINTMAX_TYPE__;long unsigned int;__UINTMAX_FMTo__;\"lo\";__UINTMAX_FMTu__;\"lu\";__UINTMAX_FMTx__;\"lx\";__UINTMAX_FMTX__;\"lX\";__UINTMAX_C_SUFFIX__;UL;__INTMAX_WIDTH__;64;__PTRDIFF_TYPE__;long int;__PTRDIFF_FMTd__;\"ld\";__PTRDIFF_FMTi__;\"li\";__PTRDIFF_WIDTH__;64;__INTPTR_TYPE__;long int;__INTPTR_FMTd__;\"ld\";__INTPTR_FMTi__;\"li\";__INTPTR_WIDTH__;64;__SIZE_TYPE__;long unsigned int;__SIZE_FMTo__;\"lo\";__SIZE_FMTu__;\"lu\";__SIZE_FMTx__;\"lx\";__SIZE_FMTX__;\"lX\";__SIZE_WIDTH__;64;__WCHAR_TYPE__;int;__WCHAR_WIDTH__;32;__WINT_TYPE__;int;__WINT_WIDTH__;32;__SIG_ATOMIC_WIDTH__;32;__SIG_ATOMIC_MAX__;2147483647;__CHAR16_TYPE__;unsigned short;__CHAR32_TYPE__;unsigned int;__UINTMAX_WIDTH__;64;__UINTPTR_TYPE__;long unsigned int;__UINTPTR_FMTo__;\"lo\";__UINTPTR_FMTu__;\"lu\";__UINTPTR_FMTx__;\"lx\";__UINTPTR_FMTX__;\"lX\";__UINTPTR_WIDTH__;64;__FLT16_DENORM_MIN__;5.9604644775390625e-8F16;__FLT16_HAS_DENORM__;1;__FLT16_DIG__;3;__FLT16_DECIMAL_DIG__;5;__FLT16_EPSILON__;9.765625e-4F16;__FLT16_HAS_INFINITY__;1;__FLT16_HAS_QUIET_NAN__;1;__FLT16_MANT_DIG__;11;__FLT16_MAX_10_EXP__;4;__FLT16_MAX_EXP__;16;__FLT16_MAX__;6.5504e+4F16;__FLT16_MIN_10_EXP__;(-4);__FLT16_MIN_EXP__;(-13);__FLT16_MIN__;6.103515625e-5F16;__FLT_DENORM_MIN__;1.40129846e-45F;__FLT_HAS_DENORM__;1;__FLT_DIG__;6;__FLT_DECIMAL_DIG__;9;__FLT_EPSILON__;1.19209290e-7F;__FLT_HAS_INFINITY__;1;__FLT_HAS_QUIET_NAN__;1;__FLT_MANT_DIG__;24;__FLT_MAX_10_EXP__;38;__FLT_MAX_EXP__;128;__FLT_MAX__;3.40282347e+38F;__FLT_MIN_10_EXP__;(-37);__FLT_MIN_EXP__;(-125);__FLT_MIN__;1.17549435e-38F;__DBL_DENORM_MIN__;4.9406564584124654e-324;__DBL_HAS_DENORM__;1;__DBL_DIG__;15;__DBL_DECIMAL_DIG__;17;__DBL_EPSILON__;2.2204460492503131e-16;__DBL_HAS_INFINITY__;1;__DBL_HAS_QUIET_NAN__;1;__DBL_MANT_DIG__;53;__DBL_MAX_10_EXP__;308;__DBL_MAX_EXP__;1024;__DBL_MAX__;1.7976931348623157e+308;__DBL_MIN_10_EXP__;(-307);__DBL_MIN_EXP__;(-1021);__DBL_MIN__;2.2250738585072014e-308;__LDBL_DENORM_MIN__;4.9406564584124654e-324L;__LDBL_HAS_DENORM__;1;__LDBL_DIG__;15;__LDBL_DECIMAL_DIG__;17;__LDBL_EPSILON__;2.2204460492503131e-16L;__LDBL_HAS_INFINITY__;1;__LDBL_HAS_QUIET_NAN__;1;__LDBL_MANT_DIG__;53;__LDBL_MAX_10_EXP__;308;__LDBL_MAX_EXP__;1024;__LDBL_MAX__;1.7976931348623157e+308L;__LDBL_MIN_10_EXP__;(-307);__LDBL_MIN_EXP__;(-1021);__LDBL_MIN__;2.2250738585072014e-308L;__POINTER_WIDTH__;64;__BIGGEST_ALIGNMENT__;8;__INT8_TYPE__;signed char;__INT8_FMTd__;\"hhd\";__INT8_FMTi__;\"hhi\";__INT8_C_SUFFIX__; ;__INT16_TYPE__;short;__INT16_FMTd__;\"hd\";__INT16_FMTi__;\"hi\";__INT16_C_SUFFIX__; ;__INT32_TYPE__;int;__INT32_FMTd__;\"d\";__INT32_FMTi__;\"i\";__INT32_C_SUFFIX__; ;__INT64_TYPE__;long long int;__INT64_FMTd__;\"lld\";__INT64_FMTi__;\"lli\";__INT64_C_SUFFIX__;LL;__UINT8_TYPE__;unsigned char;__UINT8_FMTo__;\"hho\";__UINT8_FMTu__;\"hhu\";__UINT8_FMTx__;\"hhx\";__UINT8_FMTX__;\"hhX\";__UINT8_C_SUFFIX__; ;__UINT8_MAX__;255;__INT8_MAX__;127;__UINT16_TYPE__;unsigned short;__UINT16_FMTo__;\"ho\";__UINT16_FMTu__;\"hu\";__UINT16_FMTx__;\"hx\";__UINT16_FMTX__;\"hX\";__UINT16_C_SUFFIX__; ;__UINT16_MAX__;65535;__INT16_MAX__;32767;__UINT32_TYPE__;unsigned int;__UINT32_FMTo__;\"o\";__UINT32_FMTu__;\"u\";__UINT32_FMTx__;\"x\";__UINT32_FMTX__;\"X\";__UINT32_C_SUFFIX__;U;__UINT32_MAX__;4294967295U;__INT32_MAX__;2147483647;__UINT64_TYPE__;long long unsigned int;__UINT64_FMTo__;\"llo\";__UINT64_FMTu__;\"llu\";__UINT64_FMTx__;\"llx\";__UINT64_FMTX__;\"llX\";__UINT64_C_SUFFIX__;ULL;__UINT64_MAX__;18446744073709551615ULL;__INT64_MAX__;9223372036854775807LL;__INT_LEAST8_TYPE__;signed char;__INT_LEAST8_MAX__;127;__INT_LEAST8_FMTd__;\"hhd\";__INT_LEAST8_FMTi__;\"hhi\";__UINT_LEAST8_TYPE__;unsigned char;__UINT_LEAST8_MAX__;255;__UINT_LEAST8_FMTo__;\"hho\";__UINT_LEAST8_FMTu__;\"hhu\";__UINT_LEAST8_FMTx__;\"hhx\";__UINT_LEAST8_FMTX__;\"hhX\";__INT_LEAST16_TYPE__;short;__INT_LEAST16_MAX__;32767;__INT_LEAST16_FMTd__;\"hd\";__INT_LEAST16_FMTi__;\"hi\";__UINT_LEAST16_TYPE__;unsigned short;__UINT_LEAST16_MAX__;65535;__UINT_LEAST16_FMTo__;\"ho\";__UINT_LEAST16_FMTu__;\"hu\";__UINT_LEAST16_FMTx__;\"hx\";__UINT_LEAST16_FMTX__;\"hX\";__INT_LEAST32_TYPE__;int;__INT_LEAST32_MAX__;2147483647;__INT_LEAST32_FMTd__;\"d\";__INT_LEAST32_FMTi__;\"i\";__UINT_LEAST32_TYPE__;unsigned int;__UINT_LEAST32_MAX__;4294967295U;__UINT_LEAST32_FMTo__;\"o\";__UINT_LEAST32_FMTu__;\"u\";__UINT_LEAST32_FMTx__;\"x\";__UINT_LEAST32_FMTX__;\"X\";__INT_LEAST64_TYPE__;long long int;__INT_LEAST64_MAX__;9223372036854775807LL;__INT_LEAST64_FMTd__;\"lld\";__INT_LEAST64_FMTi__;\"lli\";__UINT_LEAST64_TYPE__;long long unsigned int;__UINT_LEAST64_MAX__;18446744073709551615ULL;__UINT_LEAST64_FMTo__;\"llo\";__UINT_LEAST64_FMTu__;\"llu\";__UINT_LEAST64_FMTx__;\"llx\";__UINT_LEAST64_FMTX__;\"llX\";__INT_FAST8_TYPE__;signed char;__INT_FAST8_MAX__;127;__INT_FAST8_FMTd__;\"hhd\";__INT_FAST8_FMTi__;\"hhi\";__UINT_FAST8_TYPE__;unsigned char;__UINT_FAST8_MAX__;255;__UINT_FAST8_FMTo__;\"hho\";__UINT_FAST8_FMTu__;\"hhu\";__UINT_FAST8_FMTx__;\"hhx\";__UINT_FAST8_FMTX__;\"hhX\";__INT_FAST16_TYPE__;short;__INT_FAST16_MAX__;32767;__INT_FAST16_FMTd__;\"hd\";__INT_FAST16_FMTi__;\"hi\";__UINT_FAST16_TYPE__;unsigned short;__UINT_FAST16_MAX__;65535;__UINT_FAST16_FMTo__;\"ho\";__UINT_FAST16_FMTu__;\"hu\";__UINT_FAST16_FMTx__;\"hx\";__UINT_FAST16_FMTX__;\"hX\";__INT_FAST32_TYPE__;int;__INT_FAST32_MAX__;2147483647;__INT_FAST32_FMTd__;\"d\";__INT_FAST32_FMTi__;\"i\";__UINT_FAST32_TYPE__;unsigned int;__UINT_FAST32_MAX__;4294967295U;__UINT_FAST32_FMTo__;\"o\";__UINT_FAST32_FMTu__;\"u\";__UINT_FAST32_FMTx__;\"x\";__UINT_FAST32_FMTX__;\"X\";__INT_FAST64_TYPE__;long long int;__INT_FAST64_MAX__;9223372036854775807LL;__INT_FAST64_FMTd__;\"lld\";__INT_FAST64_FMTi__;\"lli\";__UINT_FAST64_TYPE__;long long unsigned int;__UINT_FAST64_MAX__;18446744073709551615ULL;__UINT_FAST64_FMTo__;\"llo\";__UINT_FAST64_FMTu__;\"llu\";__UINT_FAST64_FMTx__;\"llx\";__UINT_FAST64_FMTX__;\"llX\";__USER_LABEL_PREFIX__;_;__FINITE_MATH_ONLY__;0;__GNUC_STDC_INLINE__;1;__GCC_ATOMIC_TEST_AND_SET_TRUEVAL;1;__CLANG_ATOMIC_BOOL_LOCK_FREE;2;__CLANG_ATOMIC_CHAR_LOCK_FREE;2;__CLANG_ATOMIC_CHAR16_T_LOCK_FREE;2;__CLANG_ATOMIC_CHAR32_T_LOCK_FREE;2;__CLANG_ATOMIC_WCHAR_T_LOCK_FREE;2;__CLANG_ATOMIC_SHORT_LOCK_FREE;2;__CLANG_ATOMIC_INT_LOCK_FREE;2;__CLANG_ATOMIC_LONG_LOCK_FREE;2;__CLANG_ATOMIC_LLONG_LOCK_FREE;2;__CLANG_ATOMIC_POINTER_LOCK_FREE;2;__GCC_ATOMIC_BOOL_LOCK_FREE;2;__GCC_ATOMIC_CHAR_LOCK_FREE;2;__GCC_ATOMIC_CHAR16_T_LOCK_FREE;2;__GCC_ATOMIC_CHAR32_T_LOCK_FREE;2;__GCC_ATOMIC_WCHAR_T_LOCK_FREE;2;__GCC_ATOMIC_SHORT_LOCK_FREE;2;__GCC_ATOMIC_INT_LOCK_FREE;2;__GCC_ATOMIC_LONG_LOCK_FREE;2;__GCC_ATOMIC_LLONG_LOCK_FREE;2;__GCC_ATOMIC_POINTER_LOCK_FREE;2;__NO_INLINE__;1;__PIC__;2;__pic__;2;__FLT_EVAL_METHOD__;0;__FLT_RADIX__;2;__DECIMAL_DIG__;__LDBL_DECIMAL_DIG__;__SSP__;1;__nonnull;_Nonnull;__null_unspecified;_Null_unspecified;__nullable;_Nullable;__AARCH64EL__;1;__aarch64__;1;_LP64;1;__LP64__;1;__AARCH64_CMODEL_SMALL__;1;__ARM_ACLE;200;__ARM_ARCH;8;__ARM_ARCH_PROFILE;'A';__ARM_64BIT_STATE;1;__ARM_PCS_AAPCS64;1;__ARM_ARCH_ISA_A64;1;__ARM_FEATURE_CLZ;1;__ARM_FEATURE_FMA;1;__ARM_FEATURE_LDREX;0xF;__ARM_FEATURE_IDIV;1;__ARM_FEATURE_DIV;1;__ARM_FEATURE_NUMERIC_MAXMIN;1;__ARM_FEATURE_DIRECTED_ROUNDING;1;__ARM_ALIGN_MAX_STACK_PWR;4;__ARM_FP;0xE;__ARM_FP16_FORMAT_IEEE;1;__ARM_FP16_ARGS;1;__ARM_SIZEOF_WCHAR_T;4;__ARM_SIZEOF_MINIMAL_ENUM;4;__ARM_NEON;1;__ARM_NEON_FP;0xE;__ARM_FEATURE_CRC32;1;__ARM_FEATURE_CRYPTO;1;__ARM_FEATURE_UNALIGNED;1;__ARM_FEATURE_FP16_VECTOR_ARITHMETIC;1;__ARM_FEATURE_FP16_SCALAR_ARITHMETIC;1;__ARM_ARCH_8_3__;1;__ARM_FEATURE_COMPLEX;1;__ARM_FEATURE_JCVT;1;__ARM_FEATURE_QRDMX;1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1;1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2;1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4;1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_8;1;__AARCH64_SIMD__;1;__ARM64_ARCH_8__;1;__ARM_NEON__;1;__LITTLE_ENDIAN__;1;__REGISTER_PREFIX__; ;__arm64;1;__arm64__;1;__APPLE_CC__;6000;__APPLE__;1;__STDC_NO_THREADS__;1;__apple_build_version__;12050022;__weak;__attribute__((objc_gc(weak)));__strong; ;__unsafe_unretained; ;__DYNAMIC__;1;__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__;110000;__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__;110000;__MACH__;1;__STDC__;1;__STDC_HOSTED__;1;__STDC_VERSION__;201710L;__STDC_UTF_16__;1;__STDC_UTF_32__;1;__llvm__;1;__clang__;1;__clang_major__;12;__clang_minor__;0;__clang_patchlevel__;5;__clang_version__;\"12.0.5 (clang-1205.0.22.9)\";__GNUC__;4;__GNUC_MINOR__;2;__GNUC_PATCHLEVEL__;1;__GXX_ABI_VERSION;1002;__GNUG__;4;__GXX_WEAK__;1;__ATOMIC_RELAXED;0;__ATOMIC_CONSUME;1;__ATOMIC_ACQUIRE;2;__ATOMIC_RELEASE;3;__ATOMIC_ACQ_REL;4;__ATOMIC_SEQ_CST;5;__OPENCL_MEMORY_SCOPE_WORK_ITEM;0;__OPENCL_MEMORY_SCOPE_WORK_GROUP;1;__OPENCL_MEMORY_SCOPE_DEVICE;2;__OPENCL_MEMORY_SCOPE_ALL_SVM_DEVICES;3;__OPENCL_MEMORY_SCOPE_SUB_GROUP;4;__PRAGMA_REDEFINE_EXTNAME;1;__VERSION__;\"Apple LLVM 12.0.5 (clang-1205.0.22.9)\";__OBJC_BOOL_IS_BOOL;1;__cpp_rtti;199711L;__cpp_exceptions;199711L;__cpp_threadsafe_static_init;200806L;__cpp_impl_destroying_delete;201806L;__CONSTANT_CFSTRINGS__;1;__block;__attribute__((__blocks__(byref)));__BLOCKS__;1;__EXCEPTIONS;1;__GXX_RTTI;1;__DEPRECATED;1;__private_extern__;extern;__ORDER_LITTLE_ENDIAN__;1234;__ORDER_BIG_ENDIAN__;4321;__ORDER_PDP_ENDIAN__;3412;__BYTE_ORDER__;__ORDER_LITTLE_ENDIAN__;__LITTLE_ENDIAN__;1;_LP64;1;__LP64__;1;__CHAR_BIT__;8;__SCHAR_MAX__;127;__SHRT_MAX__;32767;__INT_MAX__;2147483647;__LONG_MAX__;9223372036854775807L;__LONG_LONG_MAX__;9223372036854775807LL;__WCHAR_MAX__;2147483647;__WINT_MAX__;2147483647;__INTMAX_MAX__;9223372036854775807L;__SIZE_MAX__;18446744073709551615UL;__UINTMAX_MAX__;18446744073709551615UL;__PTRDIFF_MAX__;9223372036854775807L;__INTPTR_MAX__;9223372036854775807L;__UINTPTR_MAX__;18446744073709551615UL;__SIZEOF_DOUBLE__;8;__SIZEOF_FLOAT__;4;__SIZEOF_INT__;4;__SIZEOF_LONG__;8;__SIZEOF_LONG_DOUBLE__;8;__SIZEOF_LONG_LONG__;8;__SIZEOF_POINTER__;8;__SIZEOF_SHORT__;2;__SIZEOF_PTRDIFF_T__;8;__SIZEOF_SIZE_T__;8;__SIZEOF_WCHAR_T__;4;__SIZEOF_WINT_T__;4;__SIZEOF_INT128__;16;__INTMAX_TYPE__;long int;__INTMAX_FMTd__;\"ld\";__INTMAX_FMTi__;\"li\";__INTMAX_C_SUFFIX__;L;__UINTMAX_TYPE__;long unsigned int;__UINTMAX_FMTo__;\"lo\";__UINTMAX_FMTu__;\"lu\";__UINTMAX_FMTx__;\"lx\";__UINTMAX_FMTX__;\"lX\";__UINTMAX_C_SUFFIX__;UL;__INTMAX_WIDTH__;64;__PTRDIFF_TYPE__;long int;__PTRDIFF_FMTd__;\"ld\";__PTRDIFF_FMTi__;\"li\";__PTRDIFF_WIDTH__;64;__INTPTR_TYPE__;long int;__INTPTR_FMTd__;\"ld\";__INTPTR_FMTi__;\"li\";__INTPTR_WIDTH__;64;__SIZE_TYPE__;long unsigned int;__SIZE_FMTo__;\"lo\";__SIZE_FMTu__;\"lu\";__SIZE_FMTx__;\"lx\";__SIZE_FMTX__;\"lX\";__SIZE_WIDTH__;64;__WCHAR_TYPE__;int;__WCHAR_WIDTH__;32;__WINT_TYPE__;int;__WINT_WIDTH__;32;__SIG_ATOMIC_WIDTH__;32;__SIG_ATOMIC_MAX__;2147483647;__CHAR16_TYPE__;unsigned short;__CHAR32_TYPE__;unsigned int;__UINTMAX_WIDTH__;64;__UINTPTR_TYPE__;long unsigned int;__UINTPTR_FMTo__;\"lo\";__UINTPTR_FMTu__;\"lu\";__UINTPTR_FMTx__;\"lx\";__UINTPTR_FMTX__;\"lX\";__UINTPTR_WIDTH__;64;__FLT16_DENORM_MIN__;5.9604644775390625e-8F16;__FLT16_HAS_DENORM__;1;__FLT16_DIG__;3;__FLT16_DECIMAL_DIG__;5;__FLT16_EPSILON__;9.765625e-4F16;__FLT16_HAS_INFINITY__;1;__FLT16_HAS_QUIET_NAN__;1;__FLT16_MANT_DIG__;11;__FLT16_MAX_10_EXP__;4;__FLT16_MAX_EXP__;16;__FLT16_MAX__;6.5504e+4F16;__FLT16_MIN_10_EXP__;(-4);__FLT16_MIN_EXP__;(-13);__FLT16_MIN__;6.103515625e-5F16;__FLT_DENORM_MIN__;1.40129846e-45F;__FLT_HAS_DENORM__;1;__FLT_DIG__;6;__FLT_DECIMAL_DIG__;9;__FLT_EPSILON__;1.19209290e-7F;__FLT_HAS_INFINITY__;1;__FLT_HAS_QUIET_NAN__;1;__FLT_MANT_DIG__;24;__FLT_MAX_10_EXP__;38;__FLT_MAX_EXP__;128;__FLT_MAX__;3.40282347e+38F;__FLT_MIN_10_EXP__;(-37);__FLT_MIN_EXP__;(-125);__FLT_MIN__;1.17549435e-38F;__DBL_DENORM_MIN__;4.9406564584124654e-324;__DBL_HAS_DENORM__;1;__DBL_DIG__;15;__DBL_DECIMAL_DIG__;17;__DBL_EPSILON__;2.2204460492503131e-16;__DBL_HAS_INFINITY__;1;__DBL_HAS_QUIET_NAN__;1;__DBL_MANT_DIG__;53;__DBL_MAX_10_EXP__;308;__DBL_MAX_EXP__;1024;__DBL_MAX__;1.7976931348623157e+308;__DBL_MIN_10_EXP__;(-307);__DBL_MIN_EXP__;(-1021);__DBL_MIN__;2.2250738585072014e-308;__LDBL_DENORM_MIN__;4.9406564584124654e-324L;__LDBL_HAS_DENORM__;1;__LDBL_DIG__;15;__LDBL_DECIMAL_DIG__;17;__LDBL_EPSILON__;2.2204460492503131e-16L;__LDBL_HAS_INFINITY__;1;__LDBL_HAS_QUIET_NAN__;1;__LDBL_MANT_DIG__;53;__LDBL_MAX_10_EXP__;308;__LDBL_MAX_EXP__;1024;__LDBL_MAX__;1.7976931348623157e+308L;__LDBL_MIN_10_EXP__;(-307);__LDBL_MIN_EXP__;(-1021);__LDBL_MIN__;2.2250738585072014e-308L;__POINTER_WIDTH__;64;__BIGGEST_ALIGNMENT__;8;__INT8_TYPE__;signed char;__INT8_FMTd__;\"hhd\";__INT8_FMTi__;\"hhi\";__INT8_C_SUFFIX__; ;__INT16_TYPE__;short;__INT16_FMTd__;\"hd\";__INT16_FMTi__;\"hi\";__INT16_C_SUFFIX__; ;__INT32_TYPE__;int;__INT32_FMTd__;\"d\";__INT32_FMTi__;\"i\";__INT32_C_SUFFIX__; ;__INT64_TYPE__;long long int;__INT64_FMTd__;\"lld\";__INT64_FMTi__;\"lli\";__INT64_C_SUFFIX__;LL;__UINT8_TYPE__;unsigned char;__UINT8_FMTo__;\"hho\";__UINT8_FMTu__;\"hhu\";__UINT8_FMTx__;\"hhx\";__UINT8_FMTX__;\"hhX\";__UINT8_C_SUFFIX__; ;__UINT8_MAX__;255;__INT8_MAX__;127;__UINT16_TYPE__;unsigned short;__UINT16_FMTo__;\"ho\";__UINT16_FMTu__;\"hu\";__UINT16_FMTx__;\"hx\";__UINT16_FMTX__;\"hX\";__UINT16_C_SUFFIX__; ;__UINT16_MAX__;65535;__INT16_MAX__;32767;__UINT32_TYPE__;unsigned int;__UINT32_FMTo__;\"o\";__UINT32_FMTu__;\"u\";__UINT32_FMTx__;\"x\";__UINT32_FMTX__;\"X\";__UINT32_C_SUFFIX__;U;__UINT32_MAX__;4294967295U;__INT32_MAX__;2147483647;__UINT64_TYPE__;long long unsigned int;__UINT64_FMTo__;\"llo\";__UINT64_FMTu__;\"llu\";__UINT64_FMTx__;\"llx\";__UINT64_FMTX__;\"llX\";__UINT64_C_SUFFIX__;ULL;__UINT64_MAX__;18446744073709551615ULL;__INT64_MAX__;9223372036854775807LL;__INT_LEAST8_TYPE__;signed char;__INT_LEAST8_MAX__;127;__INT_LEAST8_FMTd__;\"hhd\";__INT_LEAST8_FMTi__;\"hhi\";__UINT_LEAST8_TYPE__;unsigned char;__UINT_LEAST8_MAX__;255;__UINT_LEAST8_FMTo__;\"hho\";__UINT_LEAST8_FMTu__;\"hhu\";__UINT_LEAST8_FMTx__;\"hhx\";__UINT_LEAST8_FMTX__;\"hhX\";__INT_LEAST16_TYPE__;short;__INT_LEAST16_MAX__;32767;__INT_LEAST16_FMTd__;\"hd\";__INT_LEAST16_FMTi__;\"hi\";__UINT_LEAST16_TYPE__;unsigned short;__UINT_LEAST16_MAX__;65535;__UINT_LEAST16_FMTo__;\"ho\";__UINT_LEAST16_FMTu__;\"hu\";__UINT_LEAST16_FMTx__;\"hx\";__UINT_LEAST16_FMTX__;\"hX\";__INT_LEAST32_TYPE__;int;__INT_LEAST32_MAX__;2147483647;__INT_LEAST32_FMTd__;\"d\";__INT_LEAST32_FMTi__;\"i\";__UINT_LEAST32_TYPE__;unsigned int;__UINT_LEAST32_MAX__;4294967295U;__UINT_LEAST32_FMTo__;\"o\";__UINT_LEAST32_FMTu__;\"u\";__UINT_LEAST32_FMTx__;\"x\";__UINT_LEAST32_FMTX__;\"X\";__INT_LEAST64_TYPE__;long long int;__INT_LEAST64_MAX__;9223372036854775807LL;__INT_LEAST64_FMTd__;\"lld\";__INT_LEAST64_FMTi__;\"lli\";__UINT_LEAST64_TYPE__;long long unsigned int;__UINT_LEAST64_MAX__;18446744073709551615ULL;__UINT_LEAST64_FMTo__;\"llo\";__UINT_LEAST64_FMTu__;\"llu\";__UINT_LEAST64_FMTx__;\"llx\";__UINT_LEAST64_FMTX__;\"llX\";__INT_FAST8_TYPE__;signed char;__INT_FAST8_MAX__;127;__INT_FAST8_FMTd__;\"hhd\";__INT_FAST8_FMTi__;\"hhi\";__UINT_FAST8_TYPE__;unsigned char;__UINT_FAST8_MAX__;255;__UINT_FAST8_FMTo__;\"hho\";__UINT_FAST8_FMTu__;\"hhu\";__UINT_FAST8_FMTx__;\"hhx\";__UINT_FAST8_FMTX__;\"hhX\";__INT_FAST16_TYPE__;short;__INT_FAST16_MAX__;32767;__INT_FAST16_FMTd__;\"hd\";__INT_FAST16_FMTi__;\"hi\";__UINT_FAST16_TYPE__;unsigned short;__UINT_FAST16_MAX__;65535;__UINT_FAST16_FMTo__;\"ho\";__UINT_FAST16_FMTu__;\"hu\";__UINT_FAST16_FMTx__;\"hx\";__UINT_FAST16_FMTX__;\"hX\";__INT_FAST32_TYPE__;int;__INT_FAST32_MAX__;2147483647;__INT_FAST32_FMTd__;\"d\";__INT_FAST32_FMTi__;\"i\";__UINT_FAST32_TYPE__;unsigned int;__UINT_FAST32_MAX__;4294967295U;__UINT_FAST32_FMTo__;\"o\";__UINT_FAST32_FMTu__;\"u\";__UINT_FAST32_FMTx__;\"x\";__UINT_FAST32_FMTX__;\"X\";__INT_FAST64_TYPE__;long long int;__INT_FAST64_MAX__;9223372036854775807LL;__INT_FAST64_FMTd__;\"lld\";__INT_FAST64_FMTi__;\"lli\";__UINT_FAST64_TYPE__;long long unsigned int;__UINT_FAST64_MAX__;18446744073709551615ULL;__UINT_FAST64_FMTo__;\"llo\";__UINT_FAST64_FMTu__;\"llu\";__UINT_FAST64_FMTx__;\"llx\";__UINT_FAST64_FMTX__;\"llX\";__USER_LABEL_PREFIX__;_;__FINITE_MATH_ONLY__;0;__GNUC_GNU_INLINE__;1;__GCC_ATOMIC_TEST_AND_SET_TRUEVAL;1;__CLANG_ATOMIC_BOOL_LOCK_FREE;2;__CLANG_ATOMIC_CHAR_LOCK_FREE;2;__CLANG_ATOMIC_CHAR16_T_LOCK_FREE;2;__CLANG_ATOMIC_CHAR32_T_LOCK_FREE;2;__CLANG_ATOMIC_WCHAR_T_LOCK_FREE;2;__CLANG_ATOMIC_SHORT_LOCK_FREE;2;__CLANG_ATOMIC_INT_LOCK_FREE;2;__CLANG_ATOMIC_LONG_LOCK_FREE;2;__CLANG_ATOMIC_LLONG_LOCK_FREE;2;__CLANG_ATOMIC_POINTER_LOCK_FREE;2;__GCC_ATOMIC_BOOL_LOCK_FREE;2;__GCC_ATOMIC_CHAR_LOCK_FREE;2;__GCC_ATOMIC_CHAR16_T_LOCK_FREE;2;__GCC_ATOMIC_CHAR32_T_LOCK_FREE;2;__GCC_ATOMIC_WCHAR_T_LOCK_FREE;2;__GCC_ATOMIC_SHORT_LOCK_FREE;2;__GCC_ATOMIC_INT_LOCK_FREE;2;__GCC_ATOMIC_LONG_LOCK_FREE;2;__GCC_ATOMIC_LLONG_LOCK_FREE;2;__GCC_ATOMIC_POINTER_LOCK_FREE;2;__NO_INLINE__;1;__PIC__;2;__pic__;2;__FLT_EVAL_METHOD__;0;__FLT_RADIX__;2;__DECIMAL_DIG__;__LDBL_DECIMAL_DIG__;__SSP__;1;__nonnull;_Nonnull;__null_unspecified;_Null_unspecified;__nullable;_Nullable;__GLIBCXX_TYPE_INT_N_0;__int128;__GLIBCXX_BITSIZE_INT_N_0;128;__AARCH64EL__;1;__aarch64__;1;_LP64;1;__LP64__;1;__AARCH64_CMODEL_SMALL__;1;__ARM_ACLE;200;__ARM_ARCH;8;__ARM_ARCH_PROFILE;'A';__ARM_64BIT_STATE;1;__ARM_PCS_AAPCS64;1;__ARM_ARCH_ISA_A64;1;__ARM_FEATURE_CLZ;1;__ARM_FEATURE_FMA;1;__ARM_FEATURE_LDREX;0xF;__ARM_FEATURE_IDIV;1;__ARM_FEATURE_DIV;1;__ARM_FEATURE_NUMERIC_MAXMIN;1;__ARM_FEATURE_DIRECTED_ROUNDING;1;__ARM_ALIGN_MAX_STACK_PWR;4;__ARM_FP;0xE;__ARM_FP16_FORMAT_IEEE;1;__ARM_FP16_ARGS;1;__ARM_SIZEOF_WCHAR_T;4;__ARM_SIZEOF_MINIMAL_ENUM;4;__ARM_NEON;1;__ARM_NEON_FP;0xE;__ARM_FEATURE_CRC32;1;__ARM_FEATURE_CRYPTO;1;__ARM_FEATURE_UNALIGNED;1;__ARM_FEATURE_FP16_VECTOR_ARITHMETIC;1;__ARM_FEATURE_FP16_SCALAR_ARITHMETIC;1;__ARM_ARCH_8_3__;1;__ARM_FEATURE_COMPLEX;1;__ARM_FEATURE_JCVT;1;__ARM_FEATURE_QRDMX;1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1;1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2;1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4;1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_8;1;__AARCH64_SIMD__;1;__ARM64_ARCH_8__;1;__ARM_NEON__;1;__LITTLE_ENDIAN__;1;__REGISTER_PREFIX__; ;__arm64;1;__arm64__;1;__APPLE_CC__;6000;__APPLE__;1;__STDC_NO_THREADS__;1;__apple_build_version__;12050022;__weak;__attribute__((objc_gc(weak)));__strong; ;__unsafe_unretained; ;__DYNAMIC__;1;__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__;110000;__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__;110000;__MACH__;1;__STDC__;1;__STDC_HOSTED__;1;__cplusplus;199711L;__STDCPP_DEFAULT_NEW_ALIGNMENT__;8UL;__STDC_UTF_16__;1;__STDC_UTF_32__;1\n//CXX compiler system include directories\nCMAKE_EXTRA_GENERATOR_CXX_SYSTEM_INCLUDE_DIRS:INTERNAL=/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1;/usr/local/include;/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include;/Library/Developer/CommandLineTools/usr/include;/System/Library/Frameworks;/Library/Frameworks\n//C compiler system defined macros\nCMAKE_EXTRA_GENERATOR_C_SYSTEM_DEFINED_MACROS:INTERNAL=__llvm__;1;__clang__;1;__clang_major__;12;__clang_minor__;0;__clang_patchlevel__;5;__clang_version__;\"12.0.5 (clang-1205.0.22.9)\";__GNUC__;4;__GNUC_MINOR__;2;__GNUC_PATCHLEVEL__;1;__GXX_ABI_VERSION;1002;__ATOMIC_RELAXED;0;__ATOMIC_CONSUME;1;__ATOMIC_ACQUIRE;2;__ATOMIC_RELEASE;3;__ATOMIC_ACQ_REL;4;__ATOMIC_SEQ_CST;5;__OPENCL_MEMORY_SCOPE_WORK_ITEM;0;__OPENCL_MEMORY_SCOPE_WORK_GROUP;1;__OPENCL_MEMORY_SCOPE_DEVICE;2;__OPENCL_MEMORY_SCOPE_ALL_SVM_DEVICES;3;__OPENCL_MEMORY_SCOPE_SUB_GROUP;4;__PRAGMA_REDEFINE_EXTNAME;1;__VERSION__;\"Apple LLVM 12.0.5 (clang-1205.0.22.9)\";__OBJC_BOOL_IS_BOOL;1;__CONSTANT_CFSTRINGS__;1;__block;__attribute__((__blocks__(byref)));__BLOCKS__;1;__ORDER_LITTLE_ENDIAN__;1234;__ORDER_BIG_ENDIAN__;4321;__ORDER_PDP_ENDIAN__;3412;__BYTE_ORDER__;__ORDER_LITTLE_ENDIAN__;__LITTLE_ENDIAN__;1;_LP64;1;__LP64__;1;__CHAR_BIT__;8;__SCHAR_MAX__;127;__SHRT_MAX__;32767;__INT_MAX__;2147483647;__LONG_MAX__;9223372036854775807L;__LONG_LONG_MAX__;9223372036854775807LL;__WCHAR_MAX__;2147483647;__WINT_MAX__;2147483647;__INTMAX_MAX__;9223372036854775807L;__SIZE_MAX__;18446744073709551615UL;__UINTMAX_MAX__;18446744073709551615UL;__PTRDIFF_MAX__;9223372036854775807L;__INTPTR_MAX__;9223372036854775807L;__UINTPTR_MAX__;18446744073709551615UL;__SIZEOF_DOUBLE__;8;__SIZEOF_FLOAT__;4;__SIZEOF_INT__;4;__SIZEOF_LONG__;8;__SIZEOF_LONG_DOUBLE__;8;__SIZEOF_LONG_LONG__;8;__SIZEOF_POINTER__;8;__SIZEOF_SHORT__;2;__SIZEOF_PTRDIFF_T__;8;__SIZEOF_SIZE_T__;8;__SIZEOF_WCHAR_T__;4;__SIZEOF_WINT_T__;4;__SIZEOF_INT128__;16;__INTMAX_TYPE__;long int;__INTMAX_FMTd__;\"ld\";__INTMAX_FMTi__;\"li\";__INTMAX_C_SUFFIX__;L;__UINTMAX_TYPE__;long unsigned int;__UINTMAX_FMTo__;\"lo\";__UINTMAX_FMTu__;\"lu\";__UINTMAX_FMTx__;\"lx\";__UINTMAX_FMTX__;\"lX\";__UINTMAX_C_SUFFIX__;UL;__INTMAX_WIDTH__;64;__PTRDIFF_TYPE__;long int;__PTRDIFF_FMTd__;\"ld\";__PTRDIFF_FMTi__;\"li\";__PTRDIFF_WIDTH__;64;__INTPTR_TYPE__;long int;__INTPTR_FMTd__;\"ld\";__INTPTR_FMTi__;\"li\";__INTPTR_WIDTH__;64;__SIZE_TYPE__;long unsigned int;__SIZE_FMTo__;\"lo\";__SIZE_FMTu__;\"lu\";__SIZE_FMTx__;\"lx\";__SIZE_FMTX__;\"lX\";__SIZE_WIDTH__;64;__WCHAR_TYPE__;int;__WCHAR_WIDTH__;32;__WINT_TYPE__;int;__WINT_WIDTH__;32;__SIG_ATOMIC_WIDTH__;32;__SIG_ATOMIC_MAX__;2147483647;__CHAR16_TYPE__;unsigned short;__CHAR32_TYPE__;unsigned int;__UINTMAX_WIDTH__;64;__UINTPTR_TYPE__;long unsigned int;__UINTPTR_FMTo__;\"lo\";__UINTPTR_FMTu__;\"lu\";__UINTPTR_FMTx__;\"lx\";__UINTPTR_FMTX__;\"lX\";__UINTPTR_WIDTH__;64;__FLT16_DENORM_MIN__;5.9604644775390625e-8F16;__FLT16_HAS_DENORM__;1;__FLT16_DIG__;3;__FLT16_DECIMAL_DIG__;5;__FLT16_EPSILON__;9.765625e-4F16;__FLT16_HAS_INFINITY__;1;__FLT16_HAS_QUIET_NAN__;1;__FLT16_MANT_DIG__;11;__FLT16_MAX_10_EXP__;4;__FLT16_MAX_EXP__;16;__FLT16_MAX__;6.5504e+4F16;__FLT16_MIN_10_EXP__;(-4);__FLT16_MIN_EXP__;(-13);__FLT16_MIN__;6.103515625e-5F16;__FLT_DENORM_MIN__;1.40129846e-45F;__FLT_HAS_DENORM__;1;__FLT_DIG__;6;__FLT_DECIMAL_DIG__;9;__FLT_EPSILON__;1.19209290e-7F;__FLT_HAS_INFINITY__;1;__FLT_HAS_QUIET_NAN__;1;__FLT_MANT_DIG__;24;__FLT_MAX_10_EXP__;38;__FLT_MAX_EXP__;128;__FLT_MAX__;3.40282347e+38F;__FLT_MIN_10_EXP__;(-37);__FLT_MIN_EXP__;(-125);__FLT_MIN__;1.17549435e-38F;__DBL_DENORM_MIN__;4.9406564584124654e-324;__DBL_HAS_DENORM__;1;__DBL_DIG__;15;__DBL_DECIMAL_DIG__;17;__DBL_EPSILON__;2.2204460492503131e-16;__DBL_HAS_INFINITY__;1;__DBL_HAS_QUIET_NAN__;1;__DBL_MANT_DIG__;53;__DBL_MAX_10_EXP__;308;__DBL_MAX_EXP__;1024;__DBL_MAX__;1.7976931348623157e+308;__DBL_MIN_10_EXP__;(-307);__DBL_MIN_EXP__;(-1021);__DBL_MIN__;2.2250738585072014e-308;__LDBL_DENORM_MIN__;4.9406564584124654e-324L;__LDBL_HAS_DENORM__;1;__LDBL_DIG__;15;__LDBL_DECIMAL_DIG__;17;__LDBL_EPSILON__;2.2204460492503131e-16L;__LDBL_HAS_INFINITY__;1;__LDBL_HAS_QUIET_NAN__;1;__LDBL_MANT_DIG__;53;__LDBL_MAX_10_EXP__;308;__LDBL_MAX_EXP__;1024;__LDBL_MAX__;1.7976931348623157e+308L;__LDBL_MIN_10_EXP__;(-307);__LDBL_MIN_EXP__;(-1021);__LDBL_MIN__;2.2250738585072014e-308L;__POINTER_WIDTH__;64;__BIGGEST_ALIGNMENT__;8;__INT8_TYPE__;signed char;__INT8_FMTd__;\"hhd\";__INT8_FMTi__;\"hhi\";__INT8_C_SUFFIX__; ;__INT16_TYPE__;short;__INT16_FMTd__;\"hd\";__INT16_FMTi__;\"hi\";__INT16_C_SUFFIX__; ;__INT32_TYPE__;int;__INT32_FMTd__;\"d\";__INT32_FMTi__;\"i\";__INT32_C_SUFFIX__; ;__INT64_TYPE__;long long int;__INT64_FMTd__;\"lld\";__INT64_FMTi__;\"lli\";__INT64_C_SUFFIX__;LL;__UINT8_TYPE__;unsigned char;__UINT8_FMTo__;\"hho\";__UINT8_FMTu__;\"hhu\";__UINT8_FMTx__;\"hhx\";__UINT8_FMTX__;\"hhX\";__UINT8_C_SUFFIX__; ;__UINT8_MAX__;255;__INT8_MAX__;127;__UINT16_TYPE__;unsigned short;__UINT16_FMTo__;\"ho\";__UINT16_FMTu__;\"hu\";__UINT16_FMTx__;\"hx\";__UINT16_FMTX__;\"hX\";__UINT16_C_SUFFIX__; ;__UINT16_MAX__;65535;__INT16_MAX__;32767;__UINT32_TYPE__;unsigned int;__UINT32_FMTo__;\"o\";__UINT32_FMTu__;\"u\";__UINT32_FMTx__;\"x\";__UINT32_FMTX__;\"X\";__UINT32_C_SUFFIX__;U;__UINT32_MAX__;4294967295U;__INT32_MAX__;2147483647;__UINT64_TYPE__;long long unsigned int;__UINT64_FMTo__;\"llo\";__UINT64_FMTu__;\"llu\";__UINT64_FMTx__;\"llx\";__UINT64_FMTX__;\"llX\";__UINT64_C_SUFFIX__;ULL;__UINT64_MAX__;18446744073709551615ULL;__INT64_MAX__;9223372036854775807LL;__INT_LEAST8_TYPE__;signed char;__INT_LEAST8_MAX__;127;__INT_LEAST8_FMTd__;\"hhd\";__INT_LEAST8_FMTi__;\"hhi\";__UINT_LEAST8_TYPE__;unsigned char;__UINT_LEAST8_MAX__;255;__UINT_LEAST8_FMTo__;\"hho\";__UINT_LEAST8_FMTu__;\"hhu\";__UINT_LEAST8_FMTx__;\"hhx\";__UINT_LEAST8_FMTX__;\"hhX\";__INT_LEAST16_TYPE__;short;__INT_LEAST16_MAX__;32767;__INT_LEAST16_FMTd__;\"hd\";__INT_LEAST16_FMTi__;\"hi\";__UINT_LEAST16_TYPE__;unsigned short;__UINT_LEAST16_MAX__;65535;__UINT_LEAST16_FMTo__;\"ho\";__UINT_LEAST16_FMTu__;\"hu\";__UINT_LEAST16_FMTx__;\"hx\";__UINT_LEAST16_FMTX__;\"hX\";__INT_LEAST32_TYPE__;int;__INT_LEAST32_MAX__;2147483647;__INT_LEAST32_FMTd__;\"d\";__INT_LEAST32_FMTi__;\"i\";__UINT_LEAST32_TYPE__;unsigned int;__UINT_LEAST32_MAX__;4294967295U;__UINT_LEAST32_FMTo__;\"o\";__UINT_LEAST32_FMTu__;\"u\";__UINT_LEAST32_FMTx__;\"x\";__UINT_LEAST32_FMTX__;\"X\";__INT_LEAST64_TYPE__;long long int;__INT_LEAST64_MAX__;9223372036854775807LL;__INT_LEAST64_FMTd__;\"lld\";__INT_LEAST64_FMTi__;\"lli\";__UINT_LEAST64_TYPE__;long long unsigned int;__UINT_LEAST64_MAX__;18446744073709551615ULL;__UINT_LEAST64_FMTo__;\"llo\";__UINT_LEAST64_FMTu__;\"llu\";__UINT_LEAST64_FMTx__;\"llx\";__UINT_LEAST64_FMTX__;\"llX\";__INT_FAST8_TYPE__;signed char;__INT_FAST8_MAX__;127;__INT_FAST8_FMTd__;\"hhd\";__INT_FAST8_FMTi__;\"hhi\";__UINT_FAST8_TYPE__;unsigned char;__UINT_FAST8_MAX__;255;__UINT_FAST8_FMTo__;\"hho\";__UINT_FAST8_FMTu__;\"hhu\";__UINT_FAST8_FMTx__;\"hhx\";__UINT_FAST8_FMTX__;\"hhX\";__INT_FAST16_TYPE__;short;__INT_FAST16_MAX__;32767;__INT_FAST16_FMTd__;\"hd\";__INT_FAST16_FMTi__;\"hi\";__UINT_FAST16_TYPE__;unsigned short;__UINT_FAST16_MAX__;65535;__UINT_FAST16_FMTo__;\"ho\";__UINT_FAST16_FMTu__;\"hu\";__UINT_FAST16_FMTx__;\"hx\";__UINT_FAST16_FMTX__;\"hX\";__INT_FAST32_TYPE__;int;__INT_FAST32_MAX__;2147483647;__INT_FAST32_FMTd__;\"d\";__INT_FAST32_FMTi__;\"i\";__UINT_FAST32_TYPE__;unsigned int;__UINT_FAST32_MAX__;4294967295U;__UINT_FAST32_FMTo__;\"o\";__UINT_FAST32_FMTu__;\"u\";__UINT_FAST32_FMTx__;\"x\";__UINT_FAST32_FMTX__;\"X\";__INT_FAST64_TYPE__;long long int;__INT_FAST64_MAX__;9223372036854775807LL;__INT_FAST64_FMTd__;\"lld\";__INT_FAST64_FMTi__;\"lli\";__UINT_FAST64_TYPE__;long long unsigned int;__UINT_FAST64_MAX__;18446744073709551615ULL;__UINT_FAST64_FMTo__;\"llo\";__UINT_FAST64_FMTu__;\"llu\";__UINT_FAST64_FMTx__;\"llx\";__UINT_FAST64_FMTX__;\"llX\";__USER_LABEL_PREFIX__;_;__FINITE_MATH_ONLY__;0;__GNUC_STDC_INLINE__;1;__GCC_ATOMIC_TEST_AND_SET_TRUEVAL;1;__CLANG_ATOMIC_BOOL_LOCK_FREE;2;__CLANG_ATOMIC_CHAR_LOCK_FREE;2;__CLANG_ATOMIC_CHAR16_T_LOCK_FREE;2;__CLANG_ATOMIC_CHAR32_T_LOCK_FREE;2;__CLANG_ATOMIC_WCHAR_T_LOCK_FREE;2;__CLANG_ATOMIC_SHORT_LOCK_FREE;2;__CLANG_ATOMIC_INT_LOCK_FREE;2;__CLANG_ATOMIC_LONG_LOCK_FREE;2;__CLANG_ATOMIC_LLONG_LOCK_FREE;2;__CLANG_ATOMIC_POINTER_LOCK_FREE;2;__GCC_ATOMIC_BOOL_LOCK_FREE;2;__GCC_ATOMIC_CHAR_LOCK_FREE;2;__GCC_ATOMIC_CHAR16_T_LOCK_FREE;2;__GCC_ATOMIC_CHAR32_T_LOCK_FREE;2;__GCC_ATOMIC_WCHAR_T_LOCK_FREE;2;__GCC_ATOMIC_SHORT_LOCK_FREE;2;__GCC_ATOMIC_INT_LOCK_FREE;2;__GCC_ATOMIC_LONG_LOCK_FREE;2;__GCC_ATOMIC_LLONG_LOCK_FREE;2;__GCC_ATOMIC_POINTER_LOCK_FREE;2;__NO_INLINE__;1;__PIC__;2;__pic__;2;__FLT_EVAL_METHOD__;0;__FLT_RADIX__;2;__DECIMAL_DIG__;__LDBL_DECIMAL_DIG__;__SSP__;1;__nonnull;_Nonnull;__null_unspecified;_Null_unspecified;__nullable;_Nullable;__AARCH64EL__;1;__aarch64__;1;_LP64;1;__LP64__;1;__AARCH64_CMODEL_SMALL__;1;__ARM_ACLE;200;__ARM_ARCH;8;__ARM_ARCH_PROFILE;'A';__ARM_64BIT_STATE;1;__ARM_PCS_AAPCS64;1;__ARM_ARCH_ISA_A64;1;__ARM_FEATURE_CLZ;1;__ARM_FEATURE_FMA;1;__ARM_FEATURE_LDREX;0xF;__ARM_FEATURE_IDIV;1;__ARM_FEATURE_DIV;1;__ARM_FEATURE_NUMERIC_MAXMIN;1;__ARM_FEATURE_DIRECTED_ROUNDING;1;__ARM_ALIGN_MAX_STACK_PWR;4;__ARM_FP;0xE;__ARM_FP16_FORMAT_IEEE;1;__ARM_FP16_ARGS;1;__ARM_SIZEOF_WCHAR_T;4;__ARM_SIZEOF_MINIMAL_ENUM;4;__ARM_NEON;1;__ARM_NEON_FP;0xE;__ARM_FEATURE_CRC32;1;__ARM_FEATURE_CRYPTO;1;__ARM_FEATURE_UNALIGNED;1;__ARM_FEATURE_FP16_VECTOR_ARITHMETIC;1;__ARM_FEATURE_FP16_SCALAR_ARITHMETIC;1;__ARM_ARCH_8_3__;1;__ARM_FEATURE_COMPLEX;1;__ARM_FEATURE_JCVT;1;__ARM_FEATURE_QRDMX;1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1;1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2;1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4;1;__GCC_HAVE_SYNC_COMPARE_AND_SWAP_8;1;__AARCH64_SIMD__;1;__ARM64_ARCH_8__;1;__ARM_NEON__;1;__LITTLE_ENDIAN__;1;__REGISTER_PREFIX__; ;__arm64;1;__arm64__;1;__APPLE_CC__;6000;__APPLE__;1;__STDC_NO_THREADS__;1;__apple_build_version__;12050022;__weak;__attribute__((objc_gc(weak)));__strong; ;__unsafe_unretained; ;__DYNAMIC__;1;__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__;110000;__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__;110000;__MACH__;1;__STDC__;1;__STDC_HOSTED__;1;__STDC_VERSION__;201710L;__STDC_UTF_16__;1;__STDC_UTF_32__;1\n//C compiler system include directories\nCMAKE_EXTRA_GENERATOR_C_SYSTEM_INCLUDE_DIRS:INTERNAL=/usr/local/include;/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include;/Library/Developer/CommandLineTools/usr/include;/System/Library/Frameworks;/Library/Frameworks\n//Name of generator.\nCMAKE_GENERATOR:INTERNAL=Unix Makefiles\n//Generator instance identifier.\nCMAKE_GENERATOR_INSTANCE:INTERNAL=\n//Name of generator platform.\nCMAKE_GENERATOR_PLATFORM:INTERNAL=\n//Name of generator toolset.\nCMAKE_GENERATOR_TOOLSET:INTERNAL=\n//Source directory with the top level CMakeLists.txt file for this\n// project\nCMAKE_HOME_DIRECTORY:INTERNAL=/Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS\n//ADVANCED property for variable: CMAKE_INSTALL_NAME_TOOL\nCMAKE_INSTALL_NAME_TOOL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_LINKER\nCMAKE_LINKER-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MAKE_PROGRAM\nCMAKE_MAKE_PROGRAM-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS\nCMAKE_MODULE_LINKER_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_DEBUG\nCMAKE_MODULE_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL\nCMAKE_MODULE_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_RELEASE\nCMAKE_MODULE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO\nCMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_NM\nCMAKE_NM-ADVANCED:INTERNAL=1\n//number of local generators\nCMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1\n//ADVANCED property for variable: CMAKE_OBJCOPY\nCMAKE_OBJCOPY-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_OBJDUMP\nCMAKE_OBJDUMP-ADVANCED:INTERNAL=1\n//Platform information initialized\nCMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_RANLIB\nCMAKE_RANLIB-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_READELF\nCMAKE_READELF-ADVANCED:INTERNAL=1\n//Path to CMake installation.\nCMAKE_ROOT:INTERNAL=/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS\nCMAKE_SHARED_LINKER_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_DEBUG\nCMAKE_SHARED_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL\nCMAKE_SHARED_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_RELEASE\nCMAKE_SHARED_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO\nCMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SKIP_INSTALL_RPATH\nCMAKE_SKIP_INSTALL_RPATH-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SKIP_RPATH\nCMAKE_SKIP_RPATH-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS\nCMAKE_STATIC_LINKER_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_DEBUG\nCMAKE_STATIC_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL\nCMAKE_STATIC_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_RELEASE\nCMAKE_STATIC_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO\nCMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STRIP\nCMAKE_STRIP-ADVANCED:INTERNAL=1\n//uname command\nCMAKE_UNAME:INTERNAL=/usr/bin/uname\n//ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE\nCMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: ProcessorCount_cmd_sysctl\nProcessorCount_cmd_sysctl-ADVANCED:INTERNAL=1\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/CMakeCache.txt b/cmake-build-debug/CMakeCache.txt
+--- a/cmake-build-debug/CMakeCache.txt	(revision e6a7d7248582cd3babc8f2ed33ffc125a735e777)
++++ b/cmake-build-debug/CMakeCache.txt	(date 1627886088413)
+@@ -45,7 +45,7 @@
+ CMAKE_COLOR_MAKEFILE:BOOL=ON
+ 
+ //CXX compiler
+-CMAKE_CXX_COMPILER:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/c++
++CMAKE_CXX_COMPILER:STRING=/Library/Developer/CommandLineTools/usr/bin/c++
+ 
+ //Flags used by the CXX compiler during all build types.
+ CMAKE_CXX_FLAGS:STRING=
+@@ -63,7 +63,7 @@
+ CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
+ 
+ //C compiler
+-CMAKE_C_COMPILER:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/cc
++CMAKE_C_COMPILER:STRING=/Library/Developer/CommandLineTools/usr/bin/cc
+ 
+ //Flags used by the C compiler during all build types.
+ CMAKE_C_FLAGS:STRING=
+@@ -80,6 +80,9 @@
+ //Flags used by the C compiler during RELWITHDEBINFO builds.
+ CMAKE_C_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
+ 
++//No help, variable specified on the command line.
++CMAKE_DEPENDS_USE_COMPILER:UNINITIALIZED=FALSE
++
+ //Path to a program.
+ CMAKE_DLLTOOL:FILEPATH=CMAKE_DLLTOOL-NOTFOUND
+ 
+@@ -244,7 +247,7 @@
+ //Major version of cmake used to create the current loaded cache
+ CMAKE_CACHE_MAJOR_VERSION:INTERNAL=3
+ //Minor version of cmake used to create the current loaded cache
+-CMAKE_CACHE_MINOR_VERSION:INTERNAL=19
++CMAKE_CACHE_MINOR_VERSION:INTERNAL=20
+ //Patch version of cmake used to create the current loaded cache
+ CMAKE_CACHE_PATCH_VERSION:INTERNAL=2
+ //ADVANCED property for variable: CMAKE_COLOR_MAKEFILE
+@@ -345,7 +348,7 @@
+ //ADVANCED property for variable: CMAKE_READELF
+ CMAKE_READELF-ADVANCED:INTERNAL=1
+ //Path to CMake installation.
+-CMAKE_ROOT:INTERNAL=/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19
++CMAKE_ROOT:INTERNAL=/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20
+ //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS
+ CMAKE_SHARED_LINKER_FLAGS-ADVANCED:INTERNAL=1
+ //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_DEBUG
+Index: cmake-build-debug/CMakeFiles/CMakeError.log
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>Compiling the C compiler identification source file \"CMakeCCompilerId.c\" failed.\nCompiler: /Library/Developer/CommandLineTools/usr/bin/cc \nBuild flags: \nId flags:  \n\nThe output was:\n1\nld: library not found for -lSystem\nclang: error: linker command failed with exit code 1 (use -v to see invocation)\n\n\nCompiling the CXX compiler identification source file \"CMakeCXXCompilerId.cpp\" failed.\nCompiler: /Library/Developer/CommandLineTools/usr/bin/c++ \nBuild flags: \nId flags:  \n\nThe output was:\n1\nld: library not found for -lc++\nclang: error: linker command failed with exit code 1 (use -v to see invocation)\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/CMakeFiles/CMakeError.log b/cmake-build-debug/CMakeFiles/CMakeError.log
+--- a/cmake-build-debug/CMakeFiles/CMakeError.log	(revision e6a7d7248582cd3babc8f2ed33ffc125a735e777)
++++ b/cmake-build-debug/CMakeFiles/CMakeError.log	(date 1627886088120)
+@@ -20,3 +20,25 @@
+ clang: error: linker command failed with exit code 1 (use -v to see invocation)
+ 
+ 
++Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
++Compiler: /Library/Developer/CommandLineTools/usr/bin/cc 
++Build flags: 
++Id flags:  
++
++The output was:
++1
++ld: library not found for -lSystem
++clang: error: linker command failed with exit code 1 (use -v to see invocation)
++
++
++Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
++Compiler: /Library/Developer/CommandLineTools/usr/bin/c++ 
++Build flags: 
++Id flags:  
++
++The output was:
++1
++ld: library not found for -lc++
++clang: error: linker command failed with exit code 1 (use -v to see invocation)
++
++
+Index: cmake-build-debug/CMakeFiles/CMakeOutput.log
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>The system is: Darwin - 20.6.0 - arm64\nCompiling the C compiler identification source file \"CMakeCCompilerId.c\" succeeded.\nCompiler: /Library/Developer/CommandLineTools/usr/bin/cc \nBuild flags: \nId flags: -c \n\nThe output was:\n0\n\n\nCompilation of the C compiler identification source \"CMakeCCompilerId.c\" produced \"CMakeCCompilerId.o\"\n\nThe C compiler identification is AppleClang, found in \"/Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/3.19.2/CompilerIdC/CMakeCCompilerId.o\"\n\nCompiling the CXX compiler identification source file \"CMakeCXXCompilerId.cpp\" succeeded.\nCompiler: /Library/Developer/CommandLineTools/usr/bin/c++ \nBuild flags: \nId flags: -c \n\nThe output was:\n0\n\n\nCompilation of the CXX compiler identification source \"CMakeCXXCompilerId.cpp\" produced \"CMakeCXXCompilerId.o\"\n\nThe CXX compiler identification is AppleClang, found in \"/Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/3.19.2/CompilerIdCXX/CMakeCXXCompilerId.o\"\n\nDetecting C compiler ABI info compiled with the following output:\nChange Dir: /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/CMakeTmp\n\nRun Build Command(s):/usr/bin/make cmTC_0bb43/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_0bb43.dir/build.make CMakeFiles/cmTC_0bb43.dir/build\nBuilding C object CMakeFiles/cmTC_0bb43.dir/CMakeCCompilerABI.c.o\n/Library/Developer/CommandLineTools/usr/bin/cc   -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -v -Wl,-v -o CMakeFiles/cmTC_0bb43.dir/CMakeCCompilerABI.c.o -c /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCCompilerABI.c\nApple clang version 12.0.5 (clang-1205.0.22.9)\nTarget: aarch64-apple-darwin20.6.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\nclang: warning: -Wl,-v: 'linker' input unused [-Wunused-command-line-argument]\n \"/Library/Developer/CommandLineTools/usr/bin/clang\" -cc1 -triple arm64-apple-macosx11.0.0 -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -fno-rounding-math -munwind-tables -target-sdk-version=11.3 -fvisibility-inlines-hidden-static-local-var -target-cpu apple-a12 -target-feature +v8.3a -target-feature +fp-armv8 -target-feature +neon -target-feature +crc -target-feature +crypto -target-feature +fullfp16 -target-feature +ras -target-feature +lse -target-feature +rdm -target-feature +rcpc -target-feature +zcm -target-feature +zcz -target-feature +sha2 -target-feature +aes -target-abi darwinpcs -fallow-half-arguments-and-returns -debugger-tuning=lldb -target-linker-version 650.9 -v -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -fdebug-compilation-dir /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/CMakeTmp -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -mllvm -disable-aligned-alloc-awareness=1 -o CMakeFiles/cmTC_0bb43.dir/CMakeCCompilerABI.c.o -x c /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCCompilerABI.c\nclang -cc1 version 12.0.5 (clang-1205.0.22.9) default target arm64-apple-darwin20.6.0\nignoring nonexistent directory \"/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/local/include\"\nignoring nonexistent directory \"/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/Library/Frameworks\"\n#include \"...\" search starts here:\n#include <...> search starts here:\n /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include\n /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include\n /Library/Developer/CommandLineTools/usr/include\n /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks (framework directory)\nEnd of search list.\nLinking C executable cmTC_0bb43\n/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0bb43.dir/link.txt --verbose=1\n/Library/Developer/CommandLineTools/usr/bin/cc  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  -v -Wl,-v CMakeFiles/cmTC_0bb43.dir/CMakeCCompilerABI.c.o -o cmTC_0bb43 \nApple clang version 12.0.5 (clang-1205.0.22.9)\nTarget: aarch64-apple-darwin20.6.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n \"/Library/Developer/CommandLineTools/usr/bin/ld\" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 11.0.0 11.3 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -o cmTC_0bb43 -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_0bb43.dir/CMakeCCompilerABI.c.o -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a\n@(#)PROGRAM:ld  PROJECT:ld64-650.9\nBUILD 00:19:34 Mar 17 2021\nconfigured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em\nLibrary search paths:\n\t/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib\nFramework search paths:\n\t/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/\n\n\n\nParsed C implicit include dir info from above output: rv=done\n  found start of include info\n  found start of implicit include info\n    add: [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include]\n    add: [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include]\n    add: [/Library/Developer/CommandLineTools/usr/include]\n  end of search list found\n  collapse include dir [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include] ==> [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include]\n  collapse include dir [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include]\n  collapse include dir [/Library/Developer/CommandLineTools/usr/include] ==> [/Library/Developer/CommandLineTools/usr/include]\n  implicit include dirs: [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include;/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include;/Library/Developer/CommandLineTools/usr/include]\n\n\nParsed C implicit link information from above output:\n  link line regex: [^( *|.*[/\\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]\n  ignore line: [Change Dir: /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/CMakeTmp]\n  ignore line: []\n  ignore line: [Run Build Command(s):/usr/bin/make cmTC_0bb43/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_0bb43.dir/build.make CMakeFiles/cmTC_0bb43.dir/build]\n  ignore line: [Building C object CMakeFiles/cmTC_0bb43.dir/CMakeCCompilerABI.c.o]\n  ignore line: [/Library/Developer/CommandLineTools/usr/bin/cc   -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -v -Wl -v -o CMakeFiles/cmTC_0bb43.dir/CMakeCCompilerABI.c.o -c /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCCompilerABI.c]\n  ignore line: [Apple clang version 12.0.5 (clang-1205.0.22.9)]\n  ignore line: [Target: aarch64-apple-darwin20.6.0]\n  ignore line: [Thread model: posix]\n  ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]\n  ignore line: [clang: warning: -Wl -v: 'linker' input unused [-Wunused-command-line-argument]]\n  ignore line: [ \"/Library/Developer/CommandLineTools/usr/bin/clang\" -cc1 -triple arm64-apple-macosx11.0.0 -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -fno-rounding-math -munwind-tables -target-sdk-version=11.3 -fvisibility-inlines-hidden-static-local-var -target-cpu apple-a12 -target-feature +v8.3a -target-feature +fp-armv8 -target-feature +neon -target-feature +crc -target-feature +crypto -target-feature +fullfp16 -target-feature +ras -target-feature +lse -target-feature +rdm -target-feature +rcpc -target-feature +zcm -target-feature +zcz -target-feature +sha2 -target-feature +aes -target-abi darwinpcs -fallow-half-arguments-and-returns -debugger-tuning=lldb -target-linker-version 650.9 -v -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -fdebug-compilation-dir /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/CMakeTmp -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -mllvm -disable-aligned-alloc-awareness=1 -o CMakeFiles/cmTC_0bb43.dir/CMakeCCompilerABI.c.o -x c /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCCompilerABI.c]\n  ignore line: [clang -cc1 version 12.0.5 (clang-1205.0.22.9) default target arm64-apple-darwin20.6.0]\n  ignore line: [ignoring nonexistent directory \"/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/local/include\"]\n  ignore line: [ignoring nonexistent directory \"/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/Library/Frameworks\"]\n  ignore line: [#include \"...\" search starts here:]\n  ignore line: [#include <...> search starts here:]\n  ignore line: [ /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include]\n  ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include]\n  ignore line: [ /Library/Developer/CommandLineTools/usr/include]\n  ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks (framework directory)]\n  ignore line: [End of search list.]\n  ignore line: [Linking C executable cmTC_0bb43]\n  ignore line: [/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0bb43.dir/link.txt --verbose=1]\n  ignore line: [/Library/Developer/CommandLineTools/usr/bin/cc  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -Wl -search_paths_first -Wl -headerpad_max_install_names  -v -Wl -v CMakeFiles/cmTC_0bb43.dir/CMakeCCompilerABI.c.o -o cmTC_0bb43 ]\n  ignore line: [Apple clang version 12.0.5 (clang-1205.0.22.9)]\n  ignore line: [Target: aarch64-apple-darwin20.6.0]\n  ignore line: [Thread model: posix]\n  ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]\n  link line: [ \"/Library/Developer/CommandLineTools/usr/bin/ld\" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 11.0.0 11.3 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -o cmTC_0bb43 -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_0bb43.dir/CMakeCCompilerABI.c.o -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a]\n    arg [/Library/Developer/CommandLineTools/usr/bin/ld] ==> ignore\n    arg [-demangle] ==> ignore\n    arg [-lto_library] ==> ignore, skip following value\n    arg [/Library/Developer/CommandLineTools/usr/lib/libLTO.dylib] ==> skip value of -lto_library\n    arg [-dynamic] ==> ignore\n    arg [-arch] ==> ignore\n    arg [arm64] ==> ignore\n    arg [-platform_version] ==> ignore\n    arg [macos] ==> ignore\n    arg [11.0.0] ==> ignore\n    arg [11.3] ==> ignore\n    arg [-syslibroot] ==> ignore\n    arg [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk] ==> ignore\n    arg [-o] ==> ignore\n    arg [cmTC_0bb43] ==> ignore\n    arg [-search_paths_first] ==> ignore\n    arg [-headerpad_max_install_names] ==> ignore\n    arg [-v] ==> ignore\n    arg [CMakeFiles/cmTC_0bb43.dir/CMakeCCompilerABI.c.o] ==> ignore\n    arg [-lSystem] ==> lib [System]\n    arg [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a] ==> lib [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a]\n  Library search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib]\n  Framework search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/]\n  remove lib [System]\n  remove lib [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a]\n  collapse library dir [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib]\n  collapse framework dir [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks]\n  implicit libs: []\n  implicit dirs: [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib]\n  implicit fwks: [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks]\n\n\nDetecting CXX compiler ABI info compiled with the following output:\nChange Dir: /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/CMakeTmp\n\nRun Build Command(s):/usr/bin/make cmTC_5ffdf/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_5ffdf.dir/build.make CMakeFiles/cmTC_5ffdf.dir/build\nBuilding CXX object CMakeFiles/cmTC_5ffdf.dir/CMakeCXXCompilerABI.cpp.o\n/Library/Developer/CommandLineTools/usr/bin/c++   -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -v -Wl,-v -o CMakeFiles/cmTC_5ffdf.dir/CMakeCXXCompilerABI.cpp.o -c /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCXXCompilerABI.cpp\nApple clang version 12.0.5 (clang-1205.0.22.9)\nTarget: aarch64-apple-darwin20.6.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\nclang: warning: -Wl,-v: 'linker' input unused [-Wunused-command-line-argument]\n \"/Library/Developer/CommandLineTools/usr/bin/clang\" -cc1 -triple arm64-apple-macosx11.0.0 -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -fno-rounding-math -munwind-tables -target-sdk-version=11.3 -fvisibility-inlines-hidden-static-local-var -target-cpu apple-a12 -target-feature +v8.3a -target-feature +fp-armv8 -target-feature +neon -target-feature +crc -target-feature +crypto -target-feature +fullfp16 -target-feature +ras -target-feature +lse -target-feature +rdm -target-feature +rcpc -target-feature +zcm -target-feature +zcz -target-feature +sha2 -target-feature +aes -target-abi darwinpcs -fallow-half-arguments-and-returns -debugger-tuning=lldb -target-linker-version 650.9 -v -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -stdlib=libc++ -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1 -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -fdeprecated-macro -fdebug-compilation-dir /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/CMakeTmp -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -mllvm -disable-aligned-alloc-awareness=1 -o CMakeFiles/cmTC_5ffdf.dir/CMakeCXXCompilerABI.cpp.o -x c++ /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCXXCompilerABI.cpp\nclang -cc1 version 12.0.5 (clang-1205.0.22.9) default target arm64-apple-darwin20.6.0\nignoring nonexistent directory \"/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/local/include\"\nignoring nonexistent directory \"/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/Library/Frameworks\"\n#include \"...\" search starts here:\n#include <...> search starts here:\n /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1\n /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include\n /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include\n /Library/Developer/CommandLineTools/usr/include\n /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks (framework directory)\nEnd of search list.\nLinking CXX executable cmTC_5ffdf\n/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5ffdf.dir/link.txt --verbose=1\n/Library/Developer/CommandLineTools/usr/bin/c++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  -v -Wl,-v CMakeFiles/cmTC_5ffdf.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_5ffdf \nApple clang version 12.0.5 (clang-1205.0.22.9)\nTarget: aarch64-apple-darwin20.6.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n \"/Library/Developer/CommandLineTools/usr/bin/ld\" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 11.0.0 11.3 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -o cmTC_5ffdf -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_5ffdf.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a\n@(#)PROGRAM:ld  PROJECT:ld64-650.9\nBUILD 00:19:34 Mar 17 2021\nconfigured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em\nLibrary search paths:\n\t/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib\nFramework search paths:\n\t/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/\n\n\n\nParsed CXX implicit include dir info from above output: rv=done\n  found start of include info\n  found start of implicit include info\n    add: [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1]\n    add: [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include]\n    add: [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include]\n    add: [/Library/Developer/CommandLineTools/usr/include]\n  end of search list found\n  collapse include dir [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1]\n  collapse include dir [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include] ==> [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include]\n  collapse include dir [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include]\n  collapse include dir [/Library/Developer/CommandLineTools/usr/include] ==> [/Library/Developer/CommandLineTools/usr/include]\n  implicit include dirs: [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1;/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include;/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include;/Library/Developer/CommandLineTools/usr/include]\n\n\nParsed CXX implicit link information from above output:\n  link line regex: [^( *|.*[/\\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]\n  ignore line: [Change Dir: /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/CMakeTmp]\n  ignore line: []\n  ignore line: [Run Build Command(s):/usr/bin/make cmTC_5ffdf/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_5ffdf.dir/build.make CMakeFiles/cmTC_5ffdf.dir/build]\n  ignore line: [Building CXX object CMakeFiles/cmTC_5ffdf.dir/CMakeCXXCompilerABI.cpp.o]\n  ignore line: [/Library/Developer/CommandLineTools/usr/bin/c++   -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -v -Wl -v -o CMakeFiles/cmTC_5ffdf.dir/CMakeCXXCompilerABI.cpp.o -c /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCXXCompilerABI.cpp]\n  ignore line: [Apple clang version 12.0.5 (clang-1205.0.22.9)]\n  ignore line: [Target: aarch64-apple-darwin20.6.0]\n  ignore line: [Thread model: posix]\n  ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]\n  ignore line: [clang: warning: -Wl -v: 'linker' input unused [-Wunused-command-line-argument]]\n  ignore line: [ \"/Library/Developer/CommandLineTools/usr/bin/clang\" -cc1 -triple arm64-apple-macosx11.0.0 -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -fno-rounding-math -munwind-tables -target-sdk-version=11.3 -fvisibility-inlines-hidden-static-local-var -target-cpu apple-a12 -target-feature +v8.3a -target-feature +fp-armv8 -target-feature +neon -target-feature +crc -target-feature +crypto -target-feature +fullfp16 -target-feature +ras -target-feature +lse -target-feature +rdm -target-feature +rcpc -target-feature +zcm -target-feature +zcz -target-feature +sha2 -target-feature +aes -target-abi darwinpcs -fallow-half-arguments-and-returns -debugger-tuning=lldb -target-linker-version 650.9 -v -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -stdlib=libc++ -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1 -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -fdeprecated-macro -fdebug-compilation-dir /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/CMakeTmp -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -mllvm -disable-aligned-alloc-awareness=1 -o CMakeFiles/cmTC_5ffdf.dir/CMakeCXXCompilerABI.cpp.o -x c++ /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCXXCompilerABI.cpp]\n  ignore line: [clang -cc1 version 12.0.5 (clang-1205.0.22.9) default target arm64-apple-darwin20.6.0]\n  ignore line: [ignoring nonexistent directory \"/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/local/include\"]\n  ignore line: [ignoring nonexistent directory \"/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/Library/Frameworks\"]\n  ignore line: [#include \"...\" search starts here:]\n  ignore line: [#include <...> search starts here:]\n  ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1]\n  ignore line: [ /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include]\n  ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include]\n  ignore line: [ /Library/Developer/CommandLineTools/usr/include]\n  ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks (framework directory)]\n  ignore line: [End of search list.]\n  ignore line: [Linking CXX executable cmTC_5ffdf]\n  ignore line: [/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5ffdf.dir/link.txt --verbose=1]\n  ignore line: [/Library/Developer/CommandLineTools/usr/bin/c++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -Wl -search_paths_first -Wl -headerpad_max_install_names  -v -Wl -v CMakeFiles/cmTC_5ffdf.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_5ffdf ]\n  ignore line: [Apple clang version 12.0.5 (clang-1205.0.22.9)]\n  ignore line: [Target: aarch64-apple-darwin20.6.0]\n  ignore line: [Thread model: posix]\n  ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]\n  link line: [ \"/Library/Developer/CommandLineTools/usr/bin/ld\" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 11.0.0 11.3 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -o cmTC_5ffdf -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_5ffdf.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a]\n    arg [/Library/Developer/CommandLineTools/usr/bin/ld] ==> ignore\n    arg [-demangle] ==> ignore\n    arg [-lto_library] ==> ignore, skip following value\n    arg [/Library/Developer/CommandLineTools/usr/lib/libLTO.dylib] ==> skip value of -lto_library\n    arg [-dynamic] ==> ignore\n    arg [-arch] ==> ignore\n    arg [arm64] ==> ignore\n    arg [-platform_version] ==> ignore\n    arg [macos] ==> ignore\n    arg [11.0.0] ==> ignore\n    arg [11.3] ==> ignore\n    arg [-syslibroot] ==> ignore\n    arg [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk] ==> ignore\n    arg [-o] ==> ignore\n    arg [cmTC_5ffdf] ==> ignore\n    arg [-search_paths_first] ==> ignore\n    arg [-headerpad_max_install_names] ==> ignore\n    arg [-v] ==> ignore\n    arg [CMakeFiles/cmTC_5ffdf.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore\n    arg [-lc++] ==> lib [c++]\n    arg [-lSystem] ==> lib [System]\n    arg [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a] ==> lib [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a]\n  Library search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib]\n  Framework search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/]\n  remove lib [System]\n  remove lib [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a]\n  collapse library dir [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib]\n  collapse framework dir [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks]\n  implicit libs: [c++]\n  implicit dirs: [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib]\n  implicit fwks: [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks]\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/CMakeFiles/CMakeOutput.log b/cmake-build-debug/CMakeFiles/CMakeOutput.log
+--- a/cmake-build-debug/CMakeFiles/CMakeOutput.log	(revision e6a7d7248582cd3babc8f2ed33ffc125a735e777)
++++ b/cmake-build-debug/CMakeFiles/CMakeOutput.log	(date 1627886088410)
+@@ -262,3 +262,269 @@
+   implicit fwks: [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks]
+ 
+ 
++The system is: Darwin - 20.6.0 - arm64
++Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
++Compiler: /Library/Developer/CommandLineTools/usr/bin/cc 
++Build flags: 
++Id flags: -c 
++
++The output was:
++0
++
++
++Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
++
++The C compiler identification is AppleClang, found in "/Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdC/CMakeCCompilerId.o"
++
++Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
++Compiler: /Library/Developer/CommandLineTools/usr/bin/c++ 
++Build flags: 
++Id flags: -c 
++
++The output was:
++0
++
++
++Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
++
++The CXX compiler identification is AppleClang, found in "/Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/3.20.2/CompilerIdCXX/CMakeCXXCompilerId.o"
++
++Detecting C compiler ABI info compiled with the following output:
++Change Dir: /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/CMakeTmp
++
++Run Build Command(s):/usr/bin/make -f Makefile cmTC_efed8/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_efed8.dir/build.make CMakeFiles/cmTC_efed8.dir/build
++Building C object CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o
++/Library/Developer/CommandLineTools/usr/bin/cc   -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -v -Wl,-v -MD -MT CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o -c /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeCCompilerABI.c
++Apple clang version 12.0.5 (clang-1205.0.22.9)
++Target: aarch64-apple-darwin20.6.0
++Thread model: posix
++InstalledDir: /Library/Developer/CommandLineTools/usr/bin
++clang: warning: -Wl,-v: 'linker' input unused [-Wunused-command-line-argument]
++ "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple arm64-apple-macosx11.0.0 -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -fno-rounding-math -munwind-tables -target-sdk-version=11.3 -fvisibility-inlines-hidden-static-local-var -target-cpu apple-a12 -target-feature +v8.3a -target-feature +fp-armv8 -target-feature +neon -target-feature +crc -target-feature +crypto -target-feature +fullfp16 -target-feature +ras -target-feature +lse -target-feature +rdm -target-feature +rcpc -target-feature +zcm -target-feature +zcz -target-feature +sha2 -target-feature +aes -target-abi darwinpcs -fallow-half-arguments-and-returns -debugger-tuning=lldb -target-linker-version 650.9 -v -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5 -dependency-file CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -fdebug-compilation-dir /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/CMakeTmp -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -mllvm -disable-aligned-alloc-awareness=1 -o CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o -x c /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeCCompilerABI.c
++clang -cc1 version 12.0.5 (clang-1205.0.22.9) default target arm64-apple-darwin20.6.0
++ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/local/include"
++ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/Library/Frameworks"
++#include "..." search starts here:
++#include <...> search starts here:
++ /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include
++ /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include
++ /Library/Developer/CommandLineTools/usr/include
++ /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks (framework directory)
++End of search list.
++Linking C executable cmTC_efed8
++/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E cmake_link_script CMakeFiles/cmTC_efed8.dir/link.txt --verbose=1
++/Library/Developer/CommandLineTools/usr/bin/cc  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  -v -Wl,-v CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o -o cmTC_efed8 
++Apple clang version 12.0.5 (clang-1205.0.22.9)
++Target: aarch64-apple-darwin20.6.0
++Thread model: posix
++InstalledDir: /Library/Developer/CommandLineTools/usr/bin
++ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 11.0.0 11.3 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -o cmTC_efed8 -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a
++@(#)PROGRAM:ld  PROJECT:ld64-650.9
++BUILD 00:19:34 Mar 17 2021
++configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em
++Library search paths:
++	/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib
++Framework search paths:
++	/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/
++
++
++
++Parsed C implicit include dir info from above output: rv=done
++  found start of include info
++  found start of implicit include info
++    add: [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include]
++    add: [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include]
++    add: [/Library/Developer/CommandLineTools/usr/include]
++  end of search list found
++  collapse include dir [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include] ==> [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include]
++  collapse include dir [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include]
++  collapse include dir [/Library/Developer/CommandLineTools/usr/include] ==> [/Library/Developer/CommandLineTools/usr/include]
++  implicit include dirs: [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include;/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include;/Library/Developer/CommandLineTools/usr/include]
++
++
++Parsed C implicit link information from above output:
++  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
++  ignore line: [Change Dir: /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/CMakeTmp]
++  ignore line: []
++  ignore line: [Run Build Command(s):/usr/bin/make -f Makefile cmTC_efed8/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_efed8.dir/build.make CMakeFiles/cmTC_efed8.dir/build]
++  ignore line: [Building C object CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o]
++  ignore line: [/Library/Developer/CommandLineTools/usr/bin/cc   -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -v -Wl -v -MD -MT CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o -c /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeCCompilerABI.c]
++  ignore line: [Apple clang version 12.0.5 (clang-1205.0.22.9)]
++  ignore line: [Target: aarch64-apple-darwin20.6.0]
++  ignore line: [Thread model: posix]
++  ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
++  ignore line: [clang: warning: -Wl -v: 'linker' input unused [-Wunused-command-line-argument]]
++  ignore line: [ "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple arm64-apple-macosx11.0.0 -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -fno-rounding-math -munwind-tables -target-sdk-version=11.3 -fvisibility-inlines-hidden-static-local-var -target-cpu apple-a12 -target-feature +v8.3a -target-feature +fp-armv8 -target-feature +neon -target-feature +crc -target-feature +crypto -target-feature +fullfp16 -target-feature +ras -target-feature +lse -target-feature +rdm -target-feature +rcpc -target-feature +zcm -target-feature +zcz -target-feature +sha2 -target-feature +aes -target-abi darwinpcs -fallow-half-arguments-and-returns -debugger-tuning=lldb -target-linker-version 650.9 -v -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5 -dependency-file CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -fdebug-compilation-dir /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/CMakeTmp -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -mllvm -disable-aligned-alloc-awareness=1 -o CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o -x c /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeCCompilerABI.c]
++  ignore line: [clang -cc1 version 12.0.5 (clang-1205.0.22.9) default target arm64-apple-darwin20.6.0]
++  ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/local/include"]
++  ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/Library/Frameworks"]
++  ignore line: [#include "..." search starts here:]
++  ignore line: [#include <...> search starts here:]
++  ignore line: [ /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include]
++  ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include]
++  ignore line: [ /Library/Developer/CommandLineTools/usr/include]
++  ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks (framework directory)]
++  ignore line: [End of search list.]
++  ignore line: [Linking C executable cmTC_efed8]
++  ignore line: [/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E cmake_link_script CMakeFiles/cmTC_efed8.dir/link.txt --verbose=1]
++  ignore line: [/Library/Developer/CommandLineTools/usr/bin/cc  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -Wl -search_paths_first -Wl -headerpad_max_install_names  -v -Wl -v CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o -o cmTC_efed8 ]
++  ignore line: [Apple clang version 12.0.5 (clang-1205.0.22.9)]
++  ignore line: [Target: aarch64-apple-darwin20.6.0]
++  ignore line: [Thread model: posix]
++  ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
++  link line: [ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 11.0.0 11.3 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -o cmTC_efed8 -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a]
++    arg [/Library/Developer/CommandLineTools/usr/bin/ld] ==> ignore
++    arg [-demangle] ==> ignore
++    arg [-lto_library] ==> ignore, skip following value
++    arg [/Library/Developer/CommandLineTools/usr/lib/libLTO.dylib] ==> skip value of -lto_library
++    arg [-dynamic] ==> ignore
++    arg [-arch] ==> ignore
++    arg [arm64] ==> ignore
++    arg [-platform_version] ==> ignore
++    arg [macos] ==> ignore
++    arg [11.0.0] ==> ignore
++    arg [11.3] ==> ignore
++    arg [-syslibroot] ==> ignore
++    arg [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk] ==> ignore
++    arg [-o] ==> ignore
++    arg [cmTC_efed8] ==> ignore
++    arg [-search_paths_first] ==> ignore
++    arg [-headerpad_max_install_names] ==> ignore
++    arg [-v] ==> ignore
++    arg [CMakeFiles/cmTC_efed8.dir/CMakeCCompilerABI.c.o] ==> ignore
++    arg [-lSystem] ==> lib [System]
++    arg [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a] ==> lib [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a]
++  Library search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib]
++  Framework search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/]
++  remove lib [System]
++  remove lib [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a]
++  collapse library dir [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib]
++  collapse framework dir [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks]
++  implicit libs: []
++  implicit objs: []
++  implicit dirs: [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib]
++  implicit fwks: [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks]
++
++
++Detecting CXX compiler ABI info compiled with the following output:
++Change Dir: /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/CMakeTmp
++
++Run Build Command(s):/usr/bin/make -f Makefile cmTC_f21bd/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_f21bd.dir/build.make CMakeFiles/cmTC_f21bd.dir/build
++Building CXX object CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o
++/Library/Developer/CommandLineTools/usr/bin/c++   -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -v -Wl,-v -MD -MT CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o -c /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeCXXCompilerABI.cpp
++Apple clang version 12.0.5 (clang-1205.0.22.9)
++Target: aarch64-apple-darwin20.6.0
++Thread model: posix
++InstalledDir: /Library/Developer/CommandLineTools/usr/bin
++clang: warning: -Wl,-v: 'linker' input unused [-Wunused-command-line-argument]
++ "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple arm64-apple-macosx11.0.0 -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -fno-rounding-math -munwind-tables -target-sdk-version=11.3 -fvisibility-inlines-hidden-static-local-var -target-cpu apple-a12 -target-feature +v8.3a -target-feature +fp-armv8 -target-feature +neon -target-feature +crc -target-feature +crypto -target-feature +fullfp16 -target-feature +ras -target-feature +lse -target-feature +rdm -target-feature +rcpc -target-feature +zcm -target-feature +zcz -target-feature +sha2 -target-feature +aes -target-abi darwinpcs -fallow-half-arguments-and-returns -debugger-tuning=lldb -target-linker-version 650.9 -v -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5 -dependency-file CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -stdlib=libc++ -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1 -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -fdeprecated-macro -fdebug-compilation-dir /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/CMakeTmp -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -mllvm -disable-aligned-alloc-awareness=1 -o CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o -x c++ /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeCXXCompilerABI.cpp
++clang -cc1 version 12.0.5 (clang-1205.0.22.9) default target arm64-apple-darwin20.6.0
++ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/local/include"
++ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/Library/Frameworks"
++#include "..." search starts here:
++#include <...> search starts here:
++ /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1
++ /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include
++ /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include
++ /Library/Developer/CommandLineTools/usr/include
++ /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks (framework directory)
++End of search list.
++Linking CXX executable cmTC_f21bd
++/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f21bd.dir/link.txt --verbose=1
++/Library/Developer/CommandLineTools/usr/bin/c++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  -v -Wl,-v CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_f21bd 
++Apple clang version 12.0.5 (clang-1205.0.22.9)
++Target: aarch64-apple-darwin20.6.0
++Thread model: posix
++InstalledDir: /Library/Developer/CommandLineTools/usr/bin
++ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 11.0.0 11.3 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -o cmTC_f21bd -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a
++@(#)PROGRAM:ld  PROJECT:ld64-650.9
++BUILD 00:19:34 Mar 17 2021
++configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em
++Library search paths:
++	/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib
++Framework search paths:
++	/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/
++
++
++
++Parsed CXX implicit include dir info from above output: rv=done
++  found start of include info
++  found start of implicit include info
++    add: [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1]
++    add: [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include]
++    add: [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include]
++    add: [/Library/Developer/CommandLineTools/usr/include]
++  end of search list found
++  collapse include dir [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1]
++  collapse include dir [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include] ==> [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include]
++  collapse include dir [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include]
++  collapse include dir [/Library/Developer/CommandLineTools/usr/include] ==> [/Library/Developer/CommandLineTools/usr/include]
++  implicit include dirs: [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1;/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include;/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include;/Library/Developer/CommandLineTools/usr/include]
++
++
++Parsed CXX implicit link information from above output:
++  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
++  ignore line: [Change Dir: /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/CMakeTmp]
++  ignore line: []
++  ignore line: [Run Build Command(s):/usr/bin/make -f Makefile cmTC_f21bd/fast && /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_f21bd.dir/build.make CMakeFiles/cmTC_f21bd.dir/build]
++  ignore line: [Building CXX object CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o]
++  ignore line: [/Library/Developer/CommandLineTools/usr/bin/c++   -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -v -Wl -v -MD -MT CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o -c /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeCXXCompilerABI.cpp]
++  ignore line: [Apple clang version 12.0.5 (clang-1205.0.22.9)]
++  ignore line: [Target: aarch64-apple-darwin20.6.0]
++  ignore line: [Thread model: posix]
++  ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
++  ignore line: [clang: warning: -Wl -v: 'linker' input unused [-Wunused-command-line-argument]]
++  ignore line: [ "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple arm64-apple-macosx11.0.0 -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -mrelax-all -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -fno-rounding-math -munwind-tables -target-sdk-version=11.3 -fvisibility-inlines-hidden-static-local-var -target-cpu apple-a12 -target-feature +v8.3a -target-feature +fp-armv8 -target-feature +neon -target-feature +crc -target-feature +crypto -target-feature +fullfp16 -target-feature +ras -target-feature +lse -target-feature +rdm -target-feature +rcpc -target-feature +zcm -target-feature +zcz -target-feature +sha2 -target-feature +aes -target-abi darwinpcs -fallow-half-arguments-and-returns -debugger-tuning=lldb -target-linker-version 650.9 -v -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5 -dependency-file CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -stdlib=libc++ -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1 -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -fdeprecated-macro -fdebug-compilation-dir /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles/CMakeTmp -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -mllvm -disable-aligned-alloc-awareness=1 -o CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o -x c++ /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeCXXCompilerABI.cpp]
++  ignore line: [clang -cc1 version 12.0.5 (clang-1205.0.22.9) default target arm64-apple-darwin20.6.0]
++  ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/local/include"]
++  ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/Library/Frameworks"]
++  ignore line: [#include "..." search starts here:]
++  ignore line: [#include <...> search starts here:]
++  ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1]
++  ignore line: [ /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/include]
++  ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include]
++  ignore line: [ /Library/Developer/CommandLineTools/usr/include]
++  ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks (framework directory)]
++  ignore line: [End of search list.]
++  ignore line: [Linking CXX executable cmTC_f21bd]
++  ignore line: [/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f21bd.dir/link.txt --verbose=1]
++  ignore line: [/Library/Developer/CommandLineTools/usr/bin/c++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -Wl -search_paths_first -Wl -headerpad_max_install_names  -v -Wl -v CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_f21bd ]
++  ignore line: [Apple clang version 12.0.5 (clang-1205.0.22.9)]
++  ignore line: [Target: aarch64-apple-darwin20.6.0]
++  ignore line: [Thread model: posix]
++  ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
++  link line: [ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 11.0.0 11.3 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -o cmTC_f21bd -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a]
++    arg [/Library/Developer/CommandLineTools/usr/bin/ld] ==> ignore
++    arg [-demangle] ==> ignore
++    arg [-lto_library] ==> ignore, skip following value
++    arg [/Library/Developer/CommandLineTools/usr/lib/libLTO.dylib] ==> skip value of -lto_library
++    arg [-dynamic] ==> ignore
++    arg [-arch] ==> ignore
++    arg [arm64] ==> ignore
++    arg [-platform_version] ==> ignore
++    arg [macos] ==> ignore
++    arg [11.0.0] ==> ignore
++    arg [11.3] ==> ignore
++    arg [-syslibroot] ==> ignore
++    arg [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk] ==> ignore
++    arg [-o] ==> ignore
++    arg [cmTC_f21bd] ==> ignore
++    arg [-search_paths_first] ==> ignore
++    arg [-headerpad_max_install_names] ==> ignore
++    arg [-v] ==> ignore
++    arg [CMakeFiles/cmTC_f21bd.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
++    arg [-lc++] ==> lib [c++]
++    arg [-lSystem] ==> lib [System]
++    arg [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a] ==> lib [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a]
++  Library search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib]
++  Framework search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/]
++  remove lib [System]
++  remove lib [/Library/Developer/CommandLineTools/usr/lib/clang/12.0.5/lib/darwin/libclang_rt.osx.a]
++  collapse library dir [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib]
++  collapse framework dir [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks]
++  implicit libs: [c++]
++  implicit objs: []
++  implicit dirs: [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/lib]
++  implicit fwks: [/Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks]
++
++
+Index: cmake-build-debug/CMakeFiles/Makefile.cmake
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># CMAKE generated file: DO NOT EDIT!\n# Generated by \"Unix Makefiles\" Generator, CMake Version 3.19\n\n# The generator used is:\nset(CMAKE_DEPENDS_GENERATOR \"Unix Makefiles\")\n\n# The top level Makefile was generated from the following files:\nset(CMAKE_MAKEFILE_DEPENDS\n  \"CMakeCache.txt\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCCompiler.cmake.in\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCCompilerABI.c\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCInformation.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCXXCompiler.cmake.in\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCXXCompilerABI.cpp\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCXXInformation.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCommonLanguageInclude.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCompilerIdDetection.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeDetermineCCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeDetermineCXXCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeDetermineCompileFeatures.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeDetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeDetermineCompilerABI.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeDetermineCompilerId.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeDetermineSystem.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeExtraGeneratorDetermineCompilerMacrosAndIncludeDirs.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeFindBinUtils.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeFindCodeBlocks.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeGenericSystem.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeInitializeConfigs.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeLanguageInformation.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeParseImplicitIncludeInfo.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeParseImplicitLinkInfo.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeSystem.cmake.in\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeSystemSpecificInformation.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeSystemSpecificInitialize.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeTestCCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeTestCXXCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeTestCompilerCommon.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeUnixFindMake.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/ADSP-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/ARMCC-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/ARMClang-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/AppleClang-C.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/AppleClang-CXX.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/AppleClang-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Borland-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Bruce-C-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/CMakeCommonCompilerMacros.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Clang-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Clang-DetermineCompilerInternal.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Clang.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Compaq-C-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Cray-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Embarcadero-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Fujitsu-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/GHS-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/GNU-C-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/GNU.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/HP-C-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/HP-CXX-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/IAR-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Intel-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/MSVC-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/NVIDIA-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/PGI-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/PathScale-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/SCO-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/SDCC-C-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/SunPro-C-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/TI-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Watcom-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/XL-C-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/XL-CXX-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/XLClang-C-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/zOS-C-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Internal/FeatureTesting.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/Apple-AppleClang-C.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/Apple-AppleClang-CXX.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/Apple-Clang-C.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/Apple-Clang-CXX.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/Apple-Clang.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/Darwin-Determine-CXX.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/Darwin-Initialize.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/Darwin.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/UnixPaths.cmake\"\n  \"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/ProcessorCount.cmake\"\n  \"../CMakeLists.txt\"\n  \"CMakeFiles/3.19.2/CMakeCCompiler.cmake\"\n  \"CMakeFiles/3.19.2/CMakeCXXCompiler.cmake\"\n  \"CMakeFiles/3.19.2/CMakeSystem.cmake\"\n  )\n\n# The corresponding makefile is:\nset(CMAKE_MAKEFILE_OUTPUTS\n  \"Makefile\"\n  \"CMakeFiles/cmake.check_cache\"\n  )\n\n# Byproducts of CMake generate step:\nset(CMAKE_MAKEFILE_PRODUCTS\n  \"CMakeFiles/3.19.2/CMakeSystem.cmake\"\n  \"CMakeFiles/3.19.2/CMakeCCompiler.cmake\"\n  \"CMakeFiles/3.19.2/CMakeCXXCompiler.cmake\"\n  \"CMakeFiles/3.19.2/CMakeCCompiler.cmake\"\n  \"CMakeFiles/3.19.2/CMakeCXXCompiler.cmake\"\n  \"CMakeFiles/CMakeDirectoryInformation.cmake\"\n  )\n\n# Dependency information for all targets:\nset(CMAKE_DEPEND_INFO_FILES\n  \"CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/DependInfo.cmake\"\n  )\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/CMakeFiles/Makefile.cmake b/cmake-build-debug/CMakeFiles/Makefile.cmake
+--- a/cmake-build-debug/CMakeFiles/Makefile.cmake	(revision e6a7d7248582cd3babc8f2ed33ffc125a735e777)
++++ b/cmake-build-debug/CMakeFiles/Makefile.cmake	(date 1627886088420)
+@@ -1,5 +1,5 @@
+ # CMAKE generated file: DO NOT EDIT!
+-# Generated by "Unix Makefiles" Generator, CMake Version 3.19
++# Generated by "Unix Makefiles" Generator, CMake Version 3.20
+ 
+ # The generator used is:
+ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
+@@ -7,99 +7,101 @@
+ # The top level Makefile was generated from the following files:
+ set(CMAKE_MAKEFILE_DEPENDS
+   "CMakeCache.txt"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCCompiler.cmake.in"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCCompilerABI.c"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCInformation.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCXXCompiler.cmake.in"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCXXCompilerABI.cpp"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCXXInformation.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCommonLanguageInclude.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeCompilerIdDetection.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeDetermineCCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeDetermineCXXCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeDetermineCompileFeatures.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeDetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeDetermineCompilerABI.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeDetermineCompilerId.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeDetermineSystem.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeExtraGeneratorDetermineCompilerMacrosAndIncludeDirs.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeFindBinUtils.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeFindCodeBlocks.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeGenericSystem.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeInitializeConfigs.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeLanguageInformation.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeParseImplicitIncludeInfo.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeParseImplicitLinkInfo.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeSystem.cmake.in"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeSystemSpecificInformation.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeSystemSpecificInitialize.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeTestCCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeTestCXXCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeTestCompilerCommon.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/CMakeUnixFindMake.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/ADSP-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/ARMCC-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/ARMClang-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/AppleClang-C.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/AppleClang-CXX.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/AppleClang-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Borland-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Bruce-C-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Clang-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Clang-DetermineCompilerInternal.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Clang.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Compaq-C-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Cray-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Embarcadero-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Fujitsu-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/GHS-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/GNU-C-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/GNU.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/HP-C-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/HP-CXX-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/IAR-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Intel-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/MSVC-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/NVIDIA-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/PGI-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/PathScale-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/SCO-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/SDCC-C-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/SunPro-C-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/TI-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/Watcom-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/XL-C-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/XL-CXX-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/XLClang-C-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/zOS-C-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Internal/FeatureTesting.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/Apple-AppleClang-C.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/Apple-AppleClang-CXX.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/Apple-Clang-C.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/Apple-Clang-CXX.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/Apple-Clang.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/Darwin-Determine-CXX.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/Darwin-Initialize.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/Darwin.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/Platform/UnixPaths.cmake"
+-  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.19/Modules/ProcessorCount.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeCCompiler.cmake.in"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeCCompilerABI.c"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeCInformation.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeCXXCompiler.cmake.in"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeCXXCompilerABI.cpp"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeCXXInformation.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeCommonLanguageInclude.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeCompilerIdDetection.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeDetermineCCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeDetermineCXXCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeDetermineCompileFeatures.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeDetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeDetermineCompilerABI.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeDetermineCompilerId.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeDetermineSystem.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeExtraGeneratorDetermineCompilerMacrosAndIncludeDirs.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeFindBinUtils.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeFindCodeBlocks.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeGenericSystem.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeInitializeConfigs.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeLanguageInformation.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeParseImplicitIncludeInfo.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeParseImplicitLinkInfo.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeParseLibraryArchitecture.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeSystem.cmake.in"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeSystemSpecificInformation.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeSystemSpecificInitialize.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeTestCCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeTestCXXCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/CMakeTestCompilerCommon.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/ADSP-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/ARMCC-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/ARMClang-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/AppleClang-C.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/AppleClang-CXX.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/AppleClang-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/Borland-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/Bruce-C-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/Clang-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/Clang-DetermineCompilerInternal.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/Clang.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/Compaq-C-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/Cray-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/Embarcadero-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/Fujitsu-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/GHS-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/GNU-C-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/GNU.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/HP-C-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/HP-CXX-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/IAR-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/Intel-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/MSVC-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/NVHPC-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/NVIDIA-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/PGI-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/PathScale-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/SCO-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/SDCC-C-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/SunPro-C-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/TI-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/Watcom-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/XL-C-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/XL-CXX-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/XLClang-C-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/zOS-C-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Internal/FeatureTesting.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Platform/Apple-AppleClang-C.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Platform/Apple-AppleClang-CXX.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Platform/Apple-Clang-C.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Platform/Apple-Clang-CXX.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Platform/Apple-Clang.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Platform/Darwin-Determine-CXX.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Platform/Darwin-Initialize.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Platform/Darwin.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/Platform/UnixPaths.cmake"
++  "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.20/Modules/ProcessorCount.cmake"
+   "../CMakeLists.txt"
+-  "CMakeFiles/3.19.2/CMakeCCompiler.cmake"
+-  "CMakeFiles/3.19.2/CMakeCXXCompiler.cmake"
+-  "CMakeFiles/3.19.2/CMakeSystem.cmake"
++  "CMakeFiles/3.20.2/CMakeCCompiler.cmake"
++  "CMakeFiles/3.20.2/CMakeCXXCompiler.cmake"
++  "CMakeFiles/3.20.2/CMakeSystem.cmake"
+   )
+ 
+ # The corresponding makefile is:
+@@ -110,11 +112,11 @@
+ 
+ # Byproducts of CMake generate step:
+ set(CMAKE_MAKEFILE_PRODUCTS
+-  "CMakeFiles/3.19.2/CMakeSystem.cmake"
+-  "CMakeFiles/3.19.2/CMakeCCompiler.cmake"
+-  "CMakeFiles/3.19.2/CMakeCXXCompiler.cmake"
+-  "CMakeFiles/3.19.2/CMakeCCompiler.cmake"
+-  "CMakeFiles/3.19.2/CMakeCXXCompiler.cmake"
++  "CMakeFiles/3.20.2/CMakeSystem.cmake"
++  "CMakeFiles/3.20.2/CMakeCCompiler.cmake"
++  "CMakeFiles/3.20.2/CMakeCXXCompiler.cmake"
++  "CMakeFiles/3.20.2/CMakeCCompiler.cmake"
++  "CMakeFiles/3.20.2/CMakeCXXCompiler.cmake"
+   "CMakeFiles/CMakeDirectoryInformation.cmake"
+   )
+ 
+Index: cmake-build-debug/CMakeFiles/Makefile2
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># CMAKE generated file: DO NOT EDIT!\n# Generated by \"Unix Makefiles\" Generator, CMake Version 3.19\n\n# Default target executed when no arguments are given to make.\ndefault_target: all\n\n.PHONY : default_target\n\n#=============================================================================\n# Special targets provided by cmake.\n\n# Disable implicit rules so canonical targets will work.\n.SUFFIXES:\n\n\n# Disable VCS-based implicit rules.\n% : %,v\n\n\n# Disable VCS-based implicit rules.\n% : RCS/%\n\n\n# Disable VCS-based implicit rules.\n% : RCS/%,v\n\n\n# Disable VCS-based implicit rules.\n% : SCCS/s.%\n\n\n# Disable VCS-based implicit rules.\n% : s.%\n\n\n.SUFFIXES: .hpux_make_needs_suffix_list\n\n\n# Command-line flag to silence nested $(MAKE).\n$(VERBOSE)MAKESILENT = -s\n\n#Suppress display of executed commands.\n$(VERBOSE).SILENT:\n\n# A target that is always out of date.\ncmake_force:\n\n.PHONY : cmake_force\n\n#=============================================================================\n# Set environment variables for the build.\n\n# The shell in which to execute make rules.\nSHELL = /bin/sh\n\n# The CMake executable.\nCMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake\n\n# The command to remove a file.\nRM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f\n\n# Escaping for special characters.\nEQUALS = =\n\n# The top-level source directory on which CMake was run.\nCMAKE_SOURCE_DIR = /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS\n\n# The top-level build directory on which CMake was run.\nCMAKE_BINARY_DIR = /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug\n\n#=============================================================================\n# Directory level rules for the build root directory\n\n# The main recursive \"all\" target.\nall: CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/all\n\n.PHONY : all\n\n# The main recursive \"preinstall\" target.\npreinstall:\n\n.PHONY : preinstall\n\n# The main recursive \"clean\" target.\nclean: CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/clean\n\n.PHONY : clean\n\n#=============================================================================\n# Target rules for target CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir\n\n# All Build rule for target.\nCMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/all:\n\t$(MAKE) $(MAKESILENT) -f CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build.make CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/depend\n\t$(MAKE) $(MAKESILENT) -f CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build.make CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build\n\t@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles --progress-num=1,2 \"Built target 210803_Travel_of_Sangkeun_LHS\"\n.PHONY : CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/all\n\n# Build rule for subdir invocation for target.\nCMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/rule: cmake_check_build_system\n\t$(CMAKE_COMMAND) -E cmake_progress_start /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles 2\n\t$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/all\n\t$(CMAKE_COMMAND) -E cmake_progress_start /Users/kylianlee/CLionProjects/210803-Travel-of-Sangkeun_LHS/cmake-build-debug/CMakeFiles 0\n.PHONY : CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/rule\n\n# Convenience name for target.\n210803_Travel_of_Sangkeun_LHS: CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/rule\n\n.PHONY : 210803_Travel_of_Sangkeun_LHS\n\n# clean rule for target.\nCMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/clean:\n\t$(MAKE) $(MAKESILENT) -f CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/build.make CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/clean\n.PHONY : CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/clean\n\n#=============================================================================\n# Special targets to cleanup operation of make.\n\n# Special rule to run CMake to check the build system integrity.\n# No rule that depends on this can have commands that come from listfiles\n# because they might be regenerated.\ncmake_check_build_system:\n\t$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0\n.PHONY : cmake_check_build_system\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cmake-build-debug/CMakeFiles/Makefile2 b/cmake-build-debug/CMakeFiles/Makefile2
+--- a/cmake-build-debug/CMakeFiles/Makefile2	(revision e6a7d7248582cd3babc8f2ed33ffc125a735e777)
++++ b/cmake-build-debug/CMakeFiles/Makefile2	(date 1627886088419)
+@@ -1,9 +1,8 @@
+ # CMAKE generated file: DO NOT EDIT!
+-# Generated by "Unix Makefiles" Generator, CMake Version 3.19
++# Generated by "Unix Makefiles" Generator, CMake Version 3.20
+ 
+ # Default target executed when no arguments are given to make.
+ default_target: all
+-
+ .PHONY : default_target
+ 
+ #=============================================================================
+@@ -12,30 +11,23 @@
+ # Disable implicit rules so canonical targets will work.
+ .SUFFIXES:
+ 
+-
+ # Disable VCS-based implicit rules.
+ % : %,v
+ 
+-
+ # Disable VCS-based implicit rules.
+ % : RCS/%
+ 
+-
+ # Disable VCS-based implicit rules.
+ % : RCS/%,v
+ 
+-
+ # Disable VCS-based implicit rules.
+ % : SCCS/s.%
+ 
+-
+ # Disable VCS-based implicit rules.
+ % : s.%
+ 
+-
+ .SUFFIXES: .hpux_make_needs_suffix_list
+ 
+-
+ # Command-line flag to silence nested $(MAKE).
+ $(VERBOSE)MAKESILENT = -s
+ 
+@@ -44,7 +36,6 @@
+ 
+ # A target that is always out of date.
+ cmake_force:
+-
+ .PHONY : cmake_force
+ 
+ #=============================================================================
+@@ -73,17 +64,14 @@
+ 
+ # The main recursive "all" target.
+ all: CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/all
+-
+ .PHONY : all
+ 
+ # The main recursive "preinstall" target.
+ preinstall:
+-
+ .PHONY : preinstall
+ 
+ # The main recursive "clean" target.
+ clean: CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/clean
+-
+ .PHONY : clean
+ 
+ #=============================================================================
+@@ -105,7 +93,6 @@
+ 
+ # Convenience name for target.
+ 210803_Travel_of_Sangkeun_LHS: CMakeFiles/210803_Travel_of_Sangkeun_LHS.dir/rule
+-
+ .PHONY : 210803_Travel_of_Sangkeun_LHS
+ 
+ # clean rule for target.
