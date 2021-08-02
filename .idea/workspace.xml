@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
-    <generated />
+    <generated>
+      <config projectName="210803_Travel_of_Sangkeun_LHS" targetName="210803_Travel_of_Sangkeun_LHS" />
+    </generated>
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -18,6 +20,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -39,6 +42,11 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RunManager">
+    <configuration name="210803_Travel_of_Sangkeun_LHS" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="210803_Travel_of_Sangkeun_LHS" TARGET_NAME="210803_Travel_of_Sangkeun_LHS" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="210803_Travel_of_Sangkeun_LHS" RUN_TARGET_NAME="210803_Travel_of_Sangkeun_LHS">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -59,7 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1627548132268</updated>
       <workItem from="1627548133508" duration="5737000" />
-      <workItem from="1627886088185" duration="3127000" />
+      <workItem from="1627886088185" duration="3377000" />
     </task>
     <servers />
   </component>
