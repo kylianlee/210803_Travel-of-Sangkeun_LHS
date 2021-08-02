@@ -4,10 +4,11 @@
 
 #include <iostream>
 #include <vector>
+#include <stack>
 
 using namespace std;
 
-//int solution(vector<vector<int>>& route, int countries);
+int solution(vector<vector<int>>& route, int countries);
 
 int main(){
   int case_num;
@@ -31,17 +32,29 @@ int main(){
 //      }
 //      cout << endl;
 //    }
-    cout << countries - 1 << endl;
+    cout << solution(route, countries) << endl;
   }
 }
 
-//int solution(vector<vector<int>>& route, int countries){
-//  vector<bool> visited(countries + 1, false);
-//  stack<int> s;
-//  int count = 0;
-//  s.push(1);
-//  visited[1] = true;
-//  while(!s.empty()){
-//
-//  }
-//}
+int solution(vector<vector<int>>& route, int countries){
+  vector<bool> visited(countries + 1, false);
+  stack<int> s;
+  int count = 0;
+  s.push(1);
+  visited[1] = true;
+  while(!s.empty()){
+    int i;
+    int top = s.top();
+    for (i = 1; i <= countries; ++i) {
+      if(!visited[i] && route[top][i] == 1){
+        s.push(i);
+        visited[i] = true;
+        count++;
+        break;
+      }
+    }
+    if(i == countries + 1)
+      s.pop();
+  }
+  return count;
+}
